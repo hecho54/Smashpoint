@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smash Point Nagykőrös - Smash Burger - Smash Point Nagykőrös</title>
+    <meta name="description" content="Smash burger Nagykőrösön. Friss, szaftos burgerek és gyors rendelés – válaszd ki a kedvenced, tedd kosárba, és rendeld meg pár kattintással.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Anton&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Lato:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+
+        .sp-container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+
+        /* ── HEADER ── */
+        header { position: relative; z-index: 50; background: #f15a24; padding: 1.1rem 0; }
+        .menu-bar { display: flex; justify-content: space-between; align-items: center; }
+        .logo img { display: block; height: 25px; width: auto; }
+        .desktop-nav { display: flex; align-items: center; gap: 32px; }
+        .desktop-nav a {
+            font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+            color: rgba(255,255,255,.95); text-decoration: none; font-weight: 500; transition: color .18s;
+        }
+        .desktop-nav a:hover, .desktop-nav a.active { color: #fff; }
+        .cart-link {
+            display: inline-flex; align-items: center; justify-content: center;
+            border: 2px solid rgba(255,255,255,.85); border-radius: 999px;
+            color: rgba(255,255,255,.95); font-size: 12px; font-weight: 700;
+            height: 36px; letter-spacing: .12em; padding: 0 12px;
+            text-decoration: none; gap: 8px; position: relative;
+        }
+        .cart-icon { width: 18px; height: 18px; flex-shrink: 0; }
+        .cart-badge {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: #fff; border-radius: 999px; color: #f15a24;
+            font-size: 11px; font-weight: 900; height: 22px; min-width: 22px;
+            padding: 0 6px; margin-left: 10px;
+        }
+        .mobile-wrap { display: none; align-items: center; gap: 12px; }
+        .mobile-toggle {
+            display: flex; flex-direction: column; gap: 6px;
+            background: none; border: none; cursor: pointer; padding: 8px;
+        }
+        .mobile-toggle span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: transform .3s, opacity .3s; }
+        .mobile-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .mobile-toggle.open span:nth-child(2) { opacity: 0; }
+        .mobile-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        .mobile-nav-drawer { overflow: hidden; max-height: 0; transition: max-height .3s ease; background: #f15a24; }
+        .mobile-nav-drawer.open { max-height: 400px; border-top: 1px solid rgba(255,255,255,.2); }
+        .mobile-nav-drawer a { display: block; padding: 16px 28px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.95); text-decoration: none; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,.15); }
+        .mobile-nav-drawer a:last-child { border-bottom: none; }
+
+        /* ── SP-MENU ── */
+        .sp-menu { background: #fff; padding: 38px 0 72px; }
+
+        .sp-menu__title {
+            margin: 0 0 .9em;
+            color: #f15a24; font-family: 'Anton', sans-serif;
+            font-size: 2.5rem; letter-spacing: .03em; text-transform: uppercase;
+        }
+
+        .sp-menu__sectionTitle {
+            color: #f15a24; font-family: 'Anton', sans-serif;
+            font-size: 2.5rem; letter-spacing: .03em; text-transform: uppercase;
+            margin: 1.3em 0;
+        }
+
+        .sp-menu__switch { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 22px; }
+        .sp-menu__switchBtn {
+            background: #fff; border: 2px solid #f15a24; border-radius: 999px;
+            color: #f15a24; font-family: 'Montserrat', sans-serif; font-size: 12px;
+            font-weight: 900; letter-spacing: .08em; padding: 10px 14px;
+            text-transform: uppercase; cursor: pointer; transition: background .18s, color .18s;
+        }
+        .sp-menu__switchBtn:hover, .sp-menu__switchBtn.active {
+            background: #f15a24; color: #fff;
+        }
+
+        /* ── MENU CARD (burger list) ── */
+        .sp-menu__list { display: grid; gap: 14px; grid-template-columns: 1fr; }
+
+        .sp-menu-card {
+            align-items: center; border-radius: 1em;
+            display: grid; grid-template-columns: 112px 1fr 54px;
+            height: 14em; overflow: hidden; position: relative;
+        }
+
+        .sp-menu-card__imgWrap {
+            align-items: center; background: transparent;
+            display: flex; height: 92px; justify-content: center; overflow: hidden;
+        }
+
+        .sp-menu-card__img {
+            bottom: -8.7em; height: 23em; left: -7em;
+            object-fit: contain; position: absolute; width: 23em;
+        }
+
+        .sp-menu-card__content {
+            color: rgba(255,255,255,.95); margin: auto;
+            padding: 10px 14px; width: 67%;
+        }
+
+        .sp-menu-card__name {
+            font-family: 'Archivo Black', sans-serif; font-size: 2.5rem;
+            letter-spacing: .02em; line-height: 1.05; text-transform: uppercase;
+        }
+
+        .sp-menu-card__desc {
+            font-family: 'Montserrat', sans-serif; font-size: 1rem;
+            line-height: 1.25; opacity: .92; padding-left: .2em;
+            width: 27em; margin-top: 6px; white-space: pre-line;
+        }
+
+        .sp-menu-card__price {
+            font-family: 'Montserrat', sans-serif; font-size: 2rem;
+            font-weight: 800; padding-left: .1em; text-transform: uppercase; margin-top: 6px;
+        }
+
+        .sp-pricePromo {
+            font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900;
+            letter-spacing: .08em; margin-bottom: 4px; opacity: .95; text-transform: uppercase;
+        }
+
+        .sp-priceRow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+
+        .sp-priceOld { font-size: .85em; opacity: .85; text-decoration: line-through; text-decoration-thickness: 3px; }
+
+        .sp-priceNow { font-size: 1em; }
+
+        .sp-menu-card__add {
+            background: #f25a24; border: none; border-radius: 999px;
+            height: 3.5em; margin-right: 0; padding: 0;
+            position: relative; right: 3em; width: 3.5em;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: background .15s;
+        }
+        .sp-menu-card__add:hover { background: #c9491a; }
+        .sp-menu-card__add.is-added { background: rgba(255,255,255,.92); }
+
+        .sp-menu-card__addPlus {
+            color: rgba(255,255,255,.96); display: block;
+            font-family: 'Anton', sans-serif; font-size: 2.7em;
+            line-height: 1; position: relative; top: -.08em;
+        }
+        .sp-menu-card__add.is-added .sp-menu-card__addPlus { color: #f15a24; }
+
+        .sp-menu-card__qty {
+            align-items: center; background: rgba(255,255,255,.95);
+            border-radius: 999px; color: #f15a24;
+            display: inline-flex; font-family: 'Montserrat', sans-serif;
+            font-size: 11px; font-weight: 900; height: 18px;
+            justify-content: center; line-height: 1; min-width: 18px;
+            padding: 0 5px; position: absolute; right: -6px; top: -6px;
+        }
+
+        /* ── MINI CARD (sauces) ── */
+        .sp-menu__grid { display: grid; gap: 1.7em; margin-bottom: 5em; }
+        .sp-menu__grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .sp-menu__grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+        .sp-mini-card {
+            border-radius: 1em; color: rgba(255,255,255,.95);
+            display: grid; grid-template-columns: 1fr;
+            height: 25em; overflow: hidden; padding: 10px; position: relative;
+        }
+
+        .sp-mini-card__imgWrap { align-items: center; display: flex; height: 50px; justify-content: center; overflow: hidden; }
+
+        .sp-mini-card__img {
+            bottom: -9em; height: 25em; max-width: unset;
+            object-fit: cover; position: absolute; right: 1em; width: 25em;
+        }
+
+        .sp-mini-card--sauce .sp-mini-card__name {
+            font-family: 'Archivo Black', sans-serif; font-size: 2rem;
+            left: 1em; line-height: 1.02; margin-top: 0; position: absolute;
+            top: 1em; z-index: 2; letter-spacing: .02em; text-transform: uppercase;
+        }
+
+        .sp-mini-card--sauce .sp-mini-card__price {
+            font-family: 'Montserrat', sans-serif; font-size: 2rem; font-weight: 900;
+            left: 1em; line-height: 1.02; margin-top: 0; position: absolute;
+            top: 2.3em; z-index: 2; text-transform: uppercase;
+        }
+
+        .sp-mini-card__add {
+            align-items: center; background: #f25a24; border: none;
+            border-radius: 999px; display: inline-flex; height: 3.5em;
+            justify-content: center; padding: 0; position: absolute;
+            cursor: pointer; transition: background .15s; z-index: 2;
+        }
+        .sp-mini-card--sauce { padding-top: 18px; padding-bottom: 18px; }
+        .sp-mini-card--sauce .sp-mini-card__add { right: 2em; top: 8em; width: 3.5em; }
+        .sp-mini-card__add:hover { background: #c9491a; }
+        .sp-mini-card__add.is-added { background: rgba(255,255,255,.92); }
+
+        .sp-mini-card__addPlus {
+            color: rgba(255,255,255,.96); display: block;
+            font-family: 'Anton', sans-serif; font-size: 2.7em;
+            line-height: 1; position: relative; top: -.08em;
+        }
+        .sp-mini-card__add.is-added .sp-mini-card__addPlus { color: #f15a24; }
+
+        .sp-mini-card__qty {
+            align-items: center; background: rgba(255,255,255,.95);
+            border-radius: 999px; color: #f15a24; display: inline-flex;
+            font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900;
+            height: 18px; justify-content: center; line-height: 1; min-width: 18px;
+            padding: 0 5px; position: absolute; right: -6px; top: -6px;
+        }
+
+        /* ── DRINK CARD ── */
+        .sp-drink-card {
+            align-items: center; border-radius: 1em;
+            display: grid; grid-template-columns: 86px 1fr 46px;
+            height: 23em; overflow: hidden; position: relative;
+        }
+
+        .sp-drink-card__imgWrap { align-items: center; background: transparent; display: flex; height: 110px; justify-content: center; overflow: hidden; }
+
+        .sp-drink-card__img {
+            bottom: -7em; height: 31em; object-fit: cover;
+            position: absolute; right: 10em; width: 31em;
+        }
+
+        img.sp-drink-card__img.sp-drink-card__img--aqua { height: 32.7em; width: 32.7em; }
+
+        .sp-drink-card__content { color: rgba(255,255,255,.95); padding: 0; }
+
+        .sp-drink-card__name {
+            font-family: 'Archivo Black', sans-serif; font-size: 2rem;
+            line-height: 1.02; position: absolute; text-align: right;
+            text-transform: uppercase; z-index: 2; left: 8.5em; top: 1.3em;
+        }
+
+        .sp-drink-card__sub {
+            font-family: 'Archivo Black', sans-serif; font-size: 2rem;
+            font-weight: 400; line-height: 1.02; position: absolute;
+            text-align: right; text-transform: uppercase; z-index: 2;
+            left: 8.55em; top: 2.2em; letter-spacing: .02em; opacity: .98;
+        }
+
+        .sp-drink-card__sub.is-zero,
+        .sp-drink-card__sub--aqua {
+            font-family: 'Montserrat', sans-serif; font-weight: 500;
+            letter-spacing: 0; opacity: .92; text-transform: none;
+        }
+
+        .sp-drink-card__size {
+            font-family: 'Montserrat', sans-serif; font-size: 1.7rem;
+            font-weight: 500; position: absolute; text-align: right;
+            z-index: 2; bottom: 2.3em; left: 10em; opacity: .9;
+        }
+
+        .sp-drink-card__price {
+            font-family: 'Montserrat', sans-serif; font-size: 1.9rem;
+            font-weight: 900; position: absolute; text-align: right;
+            text-transform: uppercase; z-index: 2; bottom: .7em; left: 9em; margin-top: 0;
+        }
+
+        .sp-drink-card__add {
+            align-items: center; background: #f25a24; border: none;
+            border-radius: 999px; display: inline-flex; height: 3.5em;
+            justify-content: center; padding: 0; position: absolute;
+            right: 2.5em; top: 10em; width: 3.5em; z-index: 2;
+            cursor: pointer; transition: background .15s;
+        }
+        .sp-drink-card__add:hover { background: #c9491a; }
+        .sp-drink-card__add.is-added { background: rgba(255,255,255,.92); }
+
+        .sp-drink-card__addPlus {
+            color: rgba(255,255,255,.96); display: block;
+            font-family: 'Anton', sans-serif; font-size: 2.7em;
+            line-height: 1; position: relative; top: -.08em;
+        }
+        .sp-drink-card__add.is-added .sp-drink-card__addPlus { color: #f15a24; }
+
+        .sp-drink-card__qty {
+            align-items: center; background: rgba(255,255,255,.95);
+            border-radius: 999px; color: #f15a24; display: inline-flex;
+            font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900;
+            height: 18px; justify-content: center; line-height: 1; min-width: 18px;
+            padding: 0 5px; position: absolute; right: -6px; top: -6px; z-index: 3;
+        }
+
+        /* ── CARTBAR ── */
+        .cartbar {
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            background: rgba(255,255,255,.85); border-top: 2px solid rgba(241,90,36,.25);
+            bottom: 0; left: 0; padding: 10px 12px calc(10px + env(safe-area-inset-bottom,0px));
+            position: fixed; right: 0; z-index: 80;
+            transform: translateY(110%); opacity: 0;
+            transition: transform .26s ease, opacity .26s ease;
+        }
+        .cartbar.visible { transform: translateY(0); opacity: 1; }
+        .cartbar-spacer { display: block; height: 86px; }
+        .cartbar__inner {
+            align-items: center; background: #fff; border: 2px solid #f15a24;
+            border-radius: 14px; display: flex; gap: 12px; justify-content: space-between;
+            margin: 0 auto; max-width: 520px; padding: 12px 14px; text-decoration: none;
+        }
+        .cartbar__left { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+        .cartbar__label { color: #111; font-family: 'Montserrat',sans-serif; font-size: 11px; font-weight: 800; letter-spacing: .08em; opacity: .75; text-transform: uppercase; }
+        .cartbar__value { color: #111; font-family: 'Montserrat',sans-serif; font-size: 14px; font-weight: 900; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .cartbar__cta {
+            align-items: center; background: #f15a24; border-radius: 10px;
+            color: #fff; display: inline-flex; flex: 0 0 auto;
+            font-family: 'Montserrat',sans-serif; font-size: 12px; font-weight: 900;
+            height: 38px; justify-content: center; letter-spacing: .06em;
+            padding: 0 14px; text-transform: uppercase; text-decoration: none;
+            border: none; cursor: pointer; transition: background .15s;
+        }
+        .cartbar__cta:hover { background: #c9491a; }
+
+        /* ── FOOTER ── */
+        .sp-footer { background-color: #fff; background-image: url(https://www.smashpoint.hu/img/smash/footerbg.svg); background-position: top; background-repeat: no-repeat; background-size: cover; color: #fff; overflow: hidden; padding: 400px 0 64px; position: relative; }
+        .sp-footer__inner { position: relative; z-index: 1; }
+        .sp-footer__grid { display: grid; gap: 44px; grid-template-columns: 1.25fr .7fr .7fr 1fr; align-items: start; }
+        .sp-footer__logo img { display: block; height: auto; width: 300px; }
+        .sp-footer__desc { font-family: 'Montserrat',sans-serif; font-size: 13px; line-height: 1.7; margin: 18px 0; max-width: 320px; opacity: .92; }
+        .sp-footer__social { display: flex; gap: 14px; margin-top: 18px; }
+        .sp-footer__social-link img { display: block; height: 30px; width: 30px; }
+        .sp-footer__links { display: flex; flex-direction: column; gap: 12px; margin-top: 52px; }
+        .sp-footer__link { color: rgba(255,255,255,.92); font-family: 'Montserrat',sans-serif; font-size: 14px; line-height: 1.2; text-decoration: none; }
+        .sp-footer__link:hover { color: #fff; }
+        .sp-footer__contact { font-family: 'Montserrat',sans-serif; font-size: 13px; line-height: 1.8; margin-top: 52px; opacity: .92; }
+        .sp-footer__bottom { font-family: 'Montserrat',sans-serif; font-size: 12px; margin-top: 76px; opacity: .9; text-align: center; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1023px) {
+            .desktop-nav { display: none; }
+            .mobile-wrap { display: flex; }
+            .sp-menu__grid--2, .sp-menu__grid--3 { grid-template-columns: 1fr; }
+            .sp-menu__title { font-size: 40px; }
+            .sp-menu__sectionTitle { font-size: 34px; margin: 1.1em 0; }
+            .sp-footer { padding: 500px 0 52px; background-size: cover; }
+            .sp-footer__grid { gap: 26px; grid-template-columns: 1fr; }
+            .sp-footer__links, .sp-footer__contact { margin-top: 22px; }
+        }
+        @media (max-width: 767px) {
+            .sp-menu-card { grid-template-columns: 92px 1fr 46px; height: 13em; }
+            .sp-menu-card__img { bottom: -6.7em !important; height: 18em !important; left: -7em !important; width: 18em !important; }
+            .sp-menu-card__content { padding: 10px; position: relative; right: 2.1em; width: 100%; z-index: 2; }
+            .sp-menu-card__name { font-size: 1.6rem; }
+            .sp-menu-card__desc { font-size: .7rem; width: auto; }
+            .sp-menu-card__price { font-size: 1.4rem; }
+            .sp-menu-card__add { height: 3em; right: 1em; width: 3em; }
+            .sp-mini-card { height: 18em; }
+            .sp-mini-card--sauce .sp-mini-card__name, .sp-mini-card--sauce .sp-mini-card__price { font-size: 1.5rem; }
+            .sp-mini-card--sauce .sp-mini-card__add { height: 3em; right: 2em; top: 7em; width: 3em; }
+            .sp-drink-card { grid-template-columns: 78px 1fr 46px; height: 20em; }
+            .sp-drink-card__name { font-size: 1.5rem; left: 6em; top: 1.7em; }
+            .sp-drink-card__sub { font-size: 1.5rem; left: 6em; top: 2.6em; }
+            .sp-drink-card__img { height: 27em; width: 27em; }
+            .sp-drink-card__size { font-size: 1.3rem; left: 7.7em; }
+            .sp-drink-card__price { font-size: 1.5rem; left: 6.7em; }
+            .sp-drink-card__add { height: 3em; top: 9em; width: 3em; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+    <div class="sp-container menu-bar">
+        <a href="index.html" class="logo">
+            <img src="https://www.smashpoint.hu/img/smash/logoheader.webp" alt="Smash Point">
+        </a>
+        <nav class="desktop-nav">
+            <a href="index.html">KEZDŐLAP</a>
+            <a href="index.html#rolunk">RÓLUNK</a>
+            <a href="menu.html" class="active">ÉTLAP / ITALLAP</a>
+            <a href="index.html#velemenyek">VÉLEMÉNYEK</a>
+            <a href="index.html#gyik">GYIK</a>
+            <a href="rendeles.html" class="cart-link" aria-label="Kosár">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" class="cart-icon">
+                    <path d="M104,216a16,16,0,1,1-16-16A16,16,0,0,1,104,216Zm88-16a16,16,0,1,0,16,16A16,16,0,0,0,192,200ZM239.71,74.14l-25.64,92.28A24.06,24.06,0,0,1,191,184H92.16A24.06,24.06,0,0,1,69,166.42L33.92,40H16a8,8,0,0,1,0-16H40a8,8,0,0,1,7.71,5.86L57.19,64H232a8,8,0,0,1,7.71,10.14ZM221.47,80H61.64l22.81,82.14A8,8,0,0,0,92.16,168H191a8,8,0,0,0,7.71-5.86Z"/>
+                </svg>
+                <span class="cart-badge" id="hdr-badge" style="display:none"></span>
+            </a>
+        </nav>
+        <div class="mobile-wrap">
+            <a href="rendeles.html" class="cart-link" aria-label="Kosár">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" class="cart-icon">
+                    <path d="M104,216a16,16,0,1,1-16-16A16,16,0,0,1,104,216Zm88-16a16,16,0,1,0,16,16A16,16,0,0,0,192,200ZM239.71,74.14l-25.64,92.28A24.06,24.06,0,0,1,191,184H92.16A24.06,24.06,0,0,1,69,166.42L33.92,40H16a8,8,0,0,1,0-16H40a8,8,0,0,1,7.71,5.86L57.19,64H232a8,8,0,0,1,7.71,10.14ZM221.47,80H61.64l22.81,82.14A8,8,0,0,0,92.16,168H191a8,8,0,0,0,7.71-5.86Z"/>
+                </svg>
+                <span class="cart-badge" id="mob-badge" style="display:none"></span>
+            </a>
+            <button class="mobile-toggle" id="mob-toggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+    <div class="mobile-nav-drawer" id="mob-drawer">
+        <a href="index.html">KEZDŐLAP</a>
+        <a href="index.html#rolunk">RÓLUNK</a>
+        <a href="menu.html">ÉTLAP / ITALLAP</a>
+        <a href="index.html#velemenyek">VÉLEMÉNYEK</a>
+        <a href="index.html#gyik">GYIK</a>
+    </div>
+</header>
+
+<!-- ═══ MENU ═══ -->
+<main>
+<section class="sp-menu">
+    <div class="sp-container">
+
+        <h1 class="sp-menu__title">MENU</h1>
+
+        <div class="sp-menu__switch">
+            <button type="button" class="sp-menu__switchBtn" onclick="document.getElementById('etlap').scrollIntoView({behavior:'smooth'})"> ÉTLAP </button>
+            <button type="button" class="sp-menu__switchBtn" onclick="document.getElementById('itallap').scrollIntoView({behavior:'smooth'})"> ITALLAP </button>
+        </div>
+
+        <!-- ── ÉTLAP ── -->
+        <div id="etlap" class="sp-menu__list">
+
+                <article class="sp-menu-card" style="background-color:#ff944b;">
+                    <div class="sp-menu-card__imgWrap">
+                        <img src="https://www.smashpoint.hu/img/smash/classic.webp" alt="CLASSIC BURGER" class="sp-menu-card__img">
+                    </div>
+                    <div class="sp-menu-card__content">
+                        <div class="sp-menu-card__name">CLASSIC BURGER</div>
+                        <div class="sp-menu-card__desc">vajas buci · dupla marhahús
+ketchup · mustár</div>
+                        <div class="sp-menu-card__price">
+                            <div class="sp-pricePromo">Tavaszi akció</div>
+                            <div class="sp-priceRow">
+                                <span class="sp-priceOld">1 990 Ft</span>
+                                <span class="sp-priceNow">1 790 Ft</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="sp-menu-card__add" aria-label="Kosárba" onclick="addToCart(this,'classic-burger','CLASSIC BURGER',1790)">
+                        <span class="sp-menu-card__addPlus">+</span>
+                    </button>
+                </article>
+
+                <article class="sp-menu-card" style="background-color:#ff944b;">
+                    <div class="sp-menu-card__imgWrap">
+                        <img src="https://www.smashpoint.hu/img/smash/hause.webp" alt="HOUSE BURGER" class="sp-menu-card__img">
+                    </div>
+                    <div class="sp-menu-card__content">
+                        <div class="sp-menu-card__name">HOUSE BURGER</div>
+                        <div class="sp-menu-card__desc">vajas buci · dupla marhahús
+szósz</div>
+                        <div class="sp-menu-card__price">
+                            <div class="sp-pricePromo">Tavaszi akció</div>
+                            <div class="sp-priceRow">
+                                <span class="sp-priceOld">1 990 Ft</span>
+                                <span class="sp-priceNow">1 790 Ft</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="sp-menu-card__add" aria-label="Kosárba" onclick="addToCart(this,'house-burger','HOUSE BURGER',1790)">
+                        <span class="sp-menu-card__addPlus">+</span>
+                    </button>
+                </article>
+
+                <article class="sp-menu-card" style="background-color:#ff944b;">
+                    <div class="sp-menu-card__imgWrap">
+                        <img src="https://www.smashpoint.hu/img/smash/jalapeno.webp" alt="JALAPEÑO BURGER" class="sp-menu-card__img">
+                    </div>
+                    <div class="sp-menu-card__content">
+                        <div class="sp-menu-card__name">JALAPEÑO BURGER</div>
+                        <div class="sp-menu-card__desc">vajas buci · dupla marhahús
+jalapeño · ketchup · mustár</div>
+                        <div class="sp-menu-card__price">
+                            <div class="sp-priceRow">
+                                <span class="sp-priceNow">2 390 Ft</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="sp-menu-card__add" aria-label="Kosárba" onclick="addToCart(this,'jalapeno-burger','JALAPEÑO BURGER',2390)">
+                        <span class="sp-menu-card__addPlus">+</span>
+                    </button>
+                </article>
+
+                <article class="sp-menu-card" style="background-color:#ff944b;">
+                    <div class="sp-menu-card__imgWrap">
+                        <img src="https://www.smashpoint.hu/img/smash/menukepekhatter/classic_menu.webp" alt="CLASSIC MENU" class="sp-menu-card__img">
+                    </div>
+                    <div class="sp-menu-card__content">
+                        <div class="sp-menu-card__name">CLASSIC MENU</div>
+                        <div class="sp-menu-card__price">
+                            <div class="sp-priceRow">
+                                <span class="sp-priceNow">2 490 Ft</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="sp-menu-card__add" aria-label="Kosárba" onclick="addToCart(this,'classic-menu','CLASSIC MENU',2490)">
+                        <span class="sp-menu-card__addPlus">+</span>
+                    </button>
+                </article>
+
+                <article class="sp-menu-card" style="background-color:#ff944b;">
+                    <div class="sp-menu-card__imgWrap">
+                        <img src="https://www.smashpoint.hu/img/smash/menukepekhatter/double_menu.webp" alt="DOUBLE MENU" class="sp-menu-card__img">
+                    </div>
+                    <div class="sp-menu-card__content">
+                        <div class="sp-menu-card__name">DOUBLE MENU</div>
+                        <div class="sp-menu-card__price">
+                            <div class="sp-priceRow">
+                                <span class="sp-priceNow">4 980 Ft</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="sp-menu-card__add" aria-label="Kosárba" onclick="addToCart(this,'double-menu','DOUBLE MENU',4980)">
+                        <span class="sp-menu-card__addPlus">+</span>
+                    </button>
+                </article>
+
+                <article class="sp-menu-card" style="background-color:#ff944b;">
+                    <div class="sp-menu-card__imgWrap">
+                        <img src="https://www.smashpoint.hu/img/smash/menukepekhatter/krumpli.webp" alt="BURGONYA" class="sp-menu-card__img">
+                    </div>
+                    <div class="sp-menu-card__content">
+                        <div class="sp-menu-card__name">BURGONYA</div>
+                        <div class="sp-menu-card__price">
+                            <div class="sp-priceRow">
+                                <span class="sp-priceNow">590 Ft</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="sp-menu-card__add" aria-label="Kosárba" onclick="addToCart(this,'burgonya','BURGONYA',590)">
+                        <span class="sp-menu-card__addPlus">+</span>
+                    </button>
+                </article>
+
+        </div>
+
+        <h2 class="sp-menu__sectionTitle">SZÓSZOK</h2>
+        <div class="sp-menu__grid sp-menu__grid--3">
+
+                <article class="sp-mini-card sp-mini-card--sauce" style="background-color:#ff944b;">
+                    <div class="sp-mini-card__imgWrap">
+                        <img src="https://www.smashpoint.hu/img/smash/menukepekhatter/sosz1.webp" alt="KETCHUP" class="sp-mini-card__img">
+                    </div>
+                    <div class="sp-mini-card__name">KETCHUP</div>
+                    <div class="sp-mini-card__price">200 Ft</div>
+                    <button type="button" class="sp-mini-card__add" aria-label="Kosárba" onclick="addToCart(this,'ketchup','KETCHUP',200)">
+                        <span class="sp-mini-card__addPlus">+</span>
+                    </button>
+                </article>
+
+                <article class="sp-mini-card sp-mini-card--sauce" style="background-color:#ff944b;">
+                    <div class="sp-mini-card__imgWrap">
+                        <img src="https://www.smashpoint.hu/img/smash/menukepekhatter/szosz2.webp" alt="MAJONÉZ" class="sp-mini-card__img">
+                    </div>
+                    <div class="sp-mini-card__name">MAJONÉZ</div>
+                    <div class="sp-mini-card__price">200 Ft</div>
+                    <button type="button" class="sp-mini-card__add" aria-label="Kosárba" onclick="addToCart(this,'majonez','MAJONÉZ',200)">
+                        <span class="sp-mini-card__addPlus">+</span>
+                    </button>
+                </article>
+
+                <article class="sp-mini-card sp-mini-card--sauce" style="background-color:#ff944b;">
+                    <div class="sp-mini-card__imgWrap">
+                        <img src="https://www.smashpoint.hu/img/smash/menukepekhatter/szosz3.webp" alt="HÁZI SZÓSZ" class="sp-mini-card__img">
+                    </div>
+                    <div class="sp-mini-card__name">HÁZI SZÓSZ</div>
+                    <div class="sp-mini-card__price">200 Ft</div>
+                    <button type="button" class="sp-mini-card__add" aria-label="Kosárba" onclick="addToCart(this,'hazi-szosz','HÁZI SZÓSZ',200)">
+                        <span class="sp-mini-card__addPlus">+</span>
+                    </button>
+                </article>
+
+        </div>
+
+        <h2 id="itallap" class="sp-menu__sectionTitle">ITALOK</h2>
+        <div class="sp-menu__grid sp-menu__grid--2">
+
+                <article class="sp-drink-card" style="background-color:#ff944b;">
+                    <div class="sp-drink-card__imgWrap">
+                        <img src="https://www.smashpoint.hu/img/smash/menukepekhatter/kola1.webp" alt="COCA COLA" class="sp-drink-card__img">
+                    </div>
+                    <div class="sp-drink-card__content">
+                        <div class="sp-drink-card__name">COCA COLA</div>
+                        <div class="sp-drink-card__size">0.33l</div>
+                        <div class="sp-drink-card__price">550 Ft</div>
+                    </div>
+                    <button type="button" class="sp-drink-card__add" aria-label="Kosárba" onclick="addToCart(this,'coca-cola','COCA COLA',550)">
+                        <span class="sp-drink-card__addPlus">+</span>
+                    </button>
+                </article>
+
+                <article class="sp-drink-card" style="background-color:#ff944b;">
+                    <div class="sp-drink-card__imgWrap">
+                        <img src="https://www.smashpoint.hu/img/smash/menukepekhatter/kolazero.webp" alt="COCA COLA" class="sp-drink-card__img">
+                    </div>
+                    <div class="sp-drink-card__content">
+                        <div class="sp-drink-card__name">COCA COLA</div>
+                        <div class="is-zero sp-drink-card__sub">zero</div>
+                        <div class="sp-drink-card__size">0.33l</div>
+                        <div class="sp-drink-card__price">550 Ft</div>
+                    </div>
+                    <button type="button" class="sp-drink-card__add" aria-label="Kosárba" onclick="addToCart(this,'cola-zero','COCA COLA zero',550)">
+                        <span class="sp-drink-card__addPlus">+</span>
+                    </button>
+                </article>
+
+                <article class="sp-drink-card" style="background-color:#ff944b;">
+                    <div class="sp-drink-card__imgWrap">
+                        <img src="https://www.smashpoint.hu/img/smash/menukepekhatter/vizmentes.webp" alt="NATUR AQUA" class="sp-drink-card__img sp-drink-card__img--aqua">
+                    </div>
+                    <div class="sp-drink-card__content">
+                        <div class="sp-drink-card__name sp-drink-card__name--aqua">NATUR AQUA</div>
+                        <div class="sp-drink-card__sub sp-drink-card__sub--aqua">mentes</div>
+                        <div class="sp-drink-card__size sp-drink-card__size--aqua">0.5l</div>
+                        <div class="sp-drink-card__price sp-drink-card__price--aqua">550 Ft</div>
+                    </div>
+                    <button type="button" class="sp-drink-card__add" aria-label="Kosárba" onclick="addToCart(this,'aqua-mentes','NATUR AQUA mentes',550)">
+                        <span class="sp-drink-card__addPlus">+</span>
+                    </button>
+                </article>
+
+                <article class="sp-drink-card" style="background-color:#ff944b;">
+                    <div class="sp-drink-card__imgWrap">
+                        <img src="https://www.smashpoint.hu/img/smash/menukepekhatter/vizsavas.webp" alt="NATUR AQUA" class="sp-drink-card__img sp-drink-card__img--aqua">
+                    </div>
+                    <div class="sp-drink-card__content">
+                        <div class="sp-drink-card__name sp-drink-card__name--aqua">NATUR AQUA</div>
+                        <div class="sp-drink-card__sub sp-drink-card__sub--aqua">savas</div>
+                        <div class="sp-drink-card__size sp-drink-card__size--aqua">0.5l</div>
+                        <div class="sp-drink-card__price sp-drink-card__price--aqua">550 Ft</div>
+                    </div>
+                    <button type="button" class="sp-drink-card__add" aria-label="Kosárba" onclick="addToCart(this,'aqua-savas','NATUR AQUA savas',550)">
+                        <span class="sp-drink-card__addPlus">+</span>
+                    </button>
+                </article>
+
+        </div>
+
+    </div>
+</section>
+</main>
+
+<!-- ═══ CARTBAR ═══ -->
+<div class="cartbar" id="cartbar">
+    <div class="cartbar__inner">
+        <div class="cartbar__left">
+            <span class="cartbar__label">Kosár</span>
+            <span class="cartbar__value" id="cartbar-val"></span>
+        </div>
+        <a href="rendeles.html" class="cartbar__cta">Rendelés leadása</a>
+    </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="sp-footer" id="CONTACT">
+    <div class="sp-container sp-footer__inner">
+        <div class="sp-footer__grid">
+            <div>
+                <a href="index.html" class="sp-footer__logo" aria-label="Smash Point">
+                    <img src="https://www.smashpoint.hu/img/smash/logofooter.webp" alt="Smash Point">
+                </a>
+                <p class="sp-footer__desc">Gyere el finom burgerekért és frissítő italokért egy barátságos, otthonos környezetbe — ahol minden látogatás igazi élmény.</p>
+                <div class="sp-footer__social">
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="sp-footer__social-link"><img src="https://www.smashpoint.hu/img/smash/facebook-white.svg" alt="Facebook"></a>
+                    <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="sp-footer__social-link"><img src="https://www.smashpoint.hu/img/smash/instagram-white.svg" alt="Instagram"></a>
+                    <a href="https://www.youtube.com" target="_blank" rel="noopener" aria-label="YouTube" class="sp-footer__social-link"><img src="https://www.smashpoint.hu/img/smash/youtube-white.svg" alt="YouTube"></a>
+                </div>
+            </div>
+            <div>
+                <div class="sp-footer__links">
+                    <a href="index.html#rolunk" class="sp-footer__link">Rólunk</a>
+                    <a href="index.html" class="sp-footer__link">Kezdőlap</a>
+                    <a href="menu.html" class="sp-footer__link">Étlap / Itallap</a>
+                </div>
+            </div>
+            <div>
+                <div class="sp-footer__links">
+                    <a href="index.html#velemenyek" class="sp-footer__link">Vélemények</a>
+                    <a href="index.html#gyik" class="sp-footer__link">GYIK</a>
+                </div>
+            </div>
+            <div>
+                <div class="sp-footer__contact">
+                    <div> Nagykőrös, Deák tér 1, Nagykőrös </div>
+                    <div>2750</div>
+                    <div>info@smashpoint.hu</div>
+                </div>
+            </div>
+        </div>
+        <div class="sp-footer__bottom"> ©2026 Smash Point Nagykőrös — Minden jog fenntartva. </div>
+    </div>
+</footer>
+
+<script>
+    // Mobile menu
+    const mobToggle = document.getElementById('mob-toggle');
+    const mobDrawer = document.getElementById('mob-drawer');
+    mobToggle.addEventListener('click', () => {
+        mobToggle.classList.toggle('open');
+        mobDrawer.classList.toggle('open');
+    });
+
+    // Cart
+    let cart = JSON.parse(sessionStorage.getItem('sp_cart') || '{}');
+
+    function updateUI() {
+        const items = Object.values(cart).filter(i => i.qty > 0);
+        const totalQty = items.reduce((s, i) => s + i.qty, 0);
+        const totalPrice = items.reduce((s, i) => s + i.price * i.qty, 0);
+
+        // badges
+        ['hdr-badge','mob-badge'].forEach(id => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.textContent = totalQty;
+            el.style.display = totalQty > 0 ? 'inline-flex' : 'none';
+        });
+
+        // cartbar
+        const cartbar = document.getElementById('cartbar');
+        const cartbarVal = document.getElementById('cartbar-val');
+        if (totalQty > 0) {
+            cartbarVal.textContent = totalPrice.toLocaleString('hu-HU') + ' Ft — ' + items.map(i => i.name + (i.qty > 1 ? ' ×' + i.qty : '')).join(', ');
+            cartbar.classList.add('visible');
+        } else {
+            cartbar.classList.remove('visible');
+        }
+
+        // per-button qty badges
+        document.querySelectorAll('[data-item-id]').forEach(btn => {
+            const id = btn.dataset.itemId;
+            const qty = cart[id] ? cart[id].qty : 0;
+            let badge = btn.querySelector('.sp-menu-card__qty, .sp-mini-card__qty, .sp-drink-card__qty');
+            if (qty > 0) {
+                if (!badge) {
+                    badge = document.createElement('span');
+                    const cls = btn.classList.contains('sp-menu-card__add') ? 'sp-menu-card__qty'
+                              : btn.classList.contains('sp-mini-card__add') ? 'sp-mini-card__qty'
+                              : 'sp-drink-card__qty';
+                    badge.className = cls;
+                    btn.appendChild(badge);
+                }
+                badge.textContent = qty;
+                btn.classList.add('is-added');
+            } else {
+                if (badge) badge.remove();
+                btn.classList.remove('is-added');
+            }
+        });
+
+        sessionStorage.setItem('sp_cart', JSON.stringify(cart));
+    }
+
+    function addToCart(btn, id, name, price) {
+        btn.dataset.itemId = id;
+        if (!cart[id]) cart[id] = { id, name, price, qty: 0 };
+        cart[id].qty++;
+        updateUI();
+    }
+
+    updateUI();
+</script>
+</body>
+</html>

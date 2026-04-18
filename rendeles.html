@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smash Point Nagykőrös - Smash Burger - Smash Point Nagykőrös</title>
+    <meta name="description" content="Smash burger Nagykőrösön. Friss, szaftos burgerek és gyors rendelés – válaszd ki a kedvenced, tedd kosárba, és rendeld meg pár kattintással.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Anton&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Lato:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+
+        .sp-container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+
+        /* ── HEADER ── */
+        header {
+            position: relative; z-index: 50;
+            background: #f15a24; padding: 1.1rem 0;
+        }
+        .menu {
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo img { display: block; height: 25px; width: auto; }
+
+        /* desktop nav */
+        .desktop-nav { display: flex; align-items: center; gap: 32px; }
+        .desktop-nav a {
+            font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+            color: rgba(255,255,255,.95); text-decoration: none;
+            font-weight: 500; transition: color .18s;
+        }
+        .desktop-nav a:hover { color: #fff; }
+        .desktop-nav a.active { font-weight: 700; }
+
+        .cart-link {
+            display: inline-flex; align-items: center; justify-content: center;
+            border: 2px solid rgba(255,255,255,.85); border-radius: 999px;
+            color: rgba(255,255,255,.95); font-family: 'Montserrat', sans-serif;
+            font-size: 12px; font-weight: 700; height: 36px;
+            letter-spacing: .12em; padding: 0 12px; text-decoration: none;
+            text-transform: uppercase; gap: 8px; position: relative;
+        }
+        .cart-icon { width: 18px; height: 18px; flex-shrink: 0; }
+        .cart-badge {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: #fff; border-radius: 999px; color: #f15a24;
+            font-size: 11px; font-weight: 900; height: 22px;
+            min-width: 22px; padding: 0 6px; margin-left: 10px;
+        }
+
+        /* mobile */
+        .mobile-wrap { display: none; align-items: center; gap: 12px; }
+        .mobile-toggle {
+            display: flex; flex-direction: column; gap: 6px;
+            background: none; border: none; cursor: pointer; padding: 8px;
+        }
+        .mobile-toggle span {
+            display: block; width: 24px; height: 2px;
+            background: #fff; border-radius: 2px;
+            transition: transform .3s, opacity .3s;
+        }
+        .mobile-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .mobile-toggle.open span:nth-child(2) { opacity: 0; }
+        .mobile-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        .mobile-nav-drawer {
+            overflow: hidden; max-height: 0;
+            transition: max-height .3s ease;
+            background: #f15a24;
+        }
+        .mobile-nav-drawer.open { max-height: 400px; border-top: 1px solid rgba(255,255,255,.2); }
+        .mobile-nav-drawer a {
+            display: block; padding: 16px 28px;
+            font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+            color: rgba(255,255,255,.95); text-decoration: none; font-weight: 500;
+            border-bottom: 1px solid rgba(255,255,255,.15);
+        }
+        .mobile-nav-drawer a:last-child { border-bottom: none; }
+
+        /* ── ORDER PAGE ── */
+        .order-page { background: #fff; padding: 84px 0 110px; }
+
+        .order-title {
+            color: #f15a24; font-family: 'Anton', sans-serif;
+            font-size: clamp(44px, 4.4vw, 62px); font-weight: 900;
+            letter-spacing: .03em; line-height: 1.05;
+            margin: 0 0 34px; text-align: center; text-transform: uppercase;
+        }
+
+        .order-grid {
+            display: grid; gap: 28px;
+            grid-template-columns: 1.1fr .9fr; align-items: start;
+        }
+
+        .order-form, .order-summary {
+            border: 2px solid #f15a24; border-radius: 14px; padding: 22px;
+        }
+
+        .order-summary-title {
+            color: #111; font-family: 'Montserrat', sans-serif;
+            font-size: 14px; font-weight: 800; margin-bottom: 14px;
+        }
+
+        /* form fields */
+        .order-field + .order-field { margin-top: 14px; }
+        .order-field.order-consent { margin-top: 18px; }
+
+        .order-label {
+            color: #111; display: block; font-family: 'Montserrat', sans-serif;
+            font-size: 12px; font-weight: 700; margin-bottom: 6px;
+        }
+
+        .order-input, .order-textarea {
+            background: #fff !important;
+            border: 2px solid rgba(241,90,36,.45); border-radius: 10px;
+            caret-color: #111; color: #111 !important;
+            font-family: 'Montserrat', sans-serif; font-size: 13px;
+            outline: none; padding: 11px 12px; width: 100%;
+            transition: border-color .2s;
+        }
+        .order-input:focus, .order-textarea:focus { border-color: #f15a24; }
+        .order-input::placeholder, .order-textarea::placeholder { color: rgba(17,17,17,.55); }
+        .order-textarea { resize: vertical; }
+
+        /* select styled same as input */
+        select.order-input {
+            appearance: none; -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23f15a24' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px; cursor: pointer;
+        }
+
+        .order-consent-label {
+            display: flex; align-items: flex-start; color: #111;
+            font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600;
+            gap: 10px; line-height: 1.35; user-select: none; cursor: pointer;
+        }
+        .order-consent-checkbox {
+            accent-color: #f15a24; flex: 0 0 auto; height: 18px; margin-top: 1px; width: 18px;
+        }
+        .order-consent-link { color: #f15a24; font-weight: 800; text-decoration: underline; }
+
+        .order-submit {
+            background: #f15a24; border: 2px solid #f15a24; border-radius: 10px;
+            color: #fff; font-family: 'Montserrat', sans-serif; font-size: 13px;
+            font-weight: 700; height: 46px; margin-top: 18px; padding: 0 22px;
+            width: 100%; cursor: pointer; letter-spacing: .04em;
+            transition: background .2s; display: block;
+        }
+        .order-submit:hover { background: #c9491a; }
+        .order-submit:disabled { opacity: .7; cursor: not-allowed; }
+
+        .order-error {
+            color: #b91c1c; font-family: 'Montserrat', sans-serif;
+            font-size: 12px; margin-top: 14px; display: none;
+        }
+
+        /* cart summary */
+        .order-empty {
+            color: #111; font-family: 'Montserrat', sans-serif;
+            font-size: 13px; opacity: .85;
+        }
+
+        .order-items { display: flex; flex-direction: column; gap: 14px; }
+
+        .order-item {
+            border: 2px solid rgba(241,90,36,.35); border-radius: 12px; padding: 14px;
+        }
+        .order-item-name {
+            color: #111; font-family: 'Montserrat', sans-serif;
+            font-size: 13px; font-weight: 700;
+        }
+        .order-item-meta {
+            display: flex; align-items: center; gap: 10px; margin-top: 10px;
+        }
+        .qty-btn {
+            background: transparent; border: 2px solid #f15a24; border-radius: 8px;
+            color: #f15a24; font-weight: 800; height: 28px; width: 28px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 16px; transition: background .15s, color .15s;
+        }
+        .qty-btn:hover { background: #f15a24; color: #fff; }
+        .qty {
+            color: #111; font-family: 'Montserrat', sans-serif;
+            font-weight: 700; text-align: center; width: 28px;
+        }
+        .order-item-price {
+            color: #111; font-family: 'Montserrat', sans-serif;
+            font-size: 13px; font-weight: 800; margin-left: auto;
+        }
+        .remove {
+            background: transparent; border: 0; color: #f15a24;
+            font-family: 'Montserrat', sans-serif; font-size: 12px;
+            margin-top: 10px; text-decoration: underline; cursor: pointer;
+            display: block;
+        }
+
+        .order-total {
+            display: flex; align-items: center; justify-content: space-between;
+            border-top: 2px solid rgba(241,90,36,.25); padding-top: 14px;
+        }
+        .order-total-label {
+            color: #111; font-family: 'Montserrat', sans-serif;
+            font-size: 13px; font-weight: 800;
+        }
+        .order-total-value {
+            color: #111; font-family: 'Montserrat', sans-serif;
+            font-size: 14px; font-weight: 900;
+        }
+
+        /* success */
+        .order-success {
+            border: 2px solid #f15a24; border-radius: 14px;
+            padding: 26px; text-align: center; display: none;
+        }
+        .order-success-title {
+            color: #111; font-family: 'Montserrat', sans-serif;
+            font-size: 14px; font-weight: 800;
+        }
+        .order-back {
+            color: #f15a24; font-family: 'Montserrat', sans-serif;
+            font-size: 13px; font-weight: 800; margin-top: 14px;
+            text-decoration: underline; background: none; border: none;
+            cursor: pointer; display: inline-flex;
+        }
+
+        /* ── CARTBAR (fixed bottom) ── */
+        .cartbar {
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            background: rgba(255,255,255,.85);
+            border-top: 2px solid rgba(241,90,36,.25);
+            bottom: 0; left: 0; padding: 10px 12px;
+            position: fixed; right: 0; z-index: 80;
+            display: none;
+        }
+        .cartbar.visible { display: block; }
+        .cartbar-spacer { display: block; height: 86px; }
+        .cartbar__inner {
+            display: flex; align-items: center; background: #fff;
+            border: 2px solid #f15a24; border-radius: 14px; gap: 12px;
+            justify-content: space-between; margin: 0 auto; max-width: 520px;
+            padding: 12px 14px; text-decoration: none;
+        }
+        .cartbar__left { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+        .cartbar__label {
+            color: #111; font-family: 'Montserrat', sans-serif;
+            font-size: 11px; font-weight: 800; letter-spacing: .08em;
+            opacity: .75; text-transform: uppercase;
+        }
+        .cartbar__value {
+            color: #111; font-family: 'Montserrat', sans-serif;
+            font-size: 14px; font-weight: 900; overflow: hidden;
+            text-overflow: ellipsis; white-space: nowrap;
+        }
+        .cartbar__cta {
+            display: inline-flex; align-items: center; background: #f15a24;
+            border-radius: 10px; color: #fff; flex: 0 0 auto;
+            font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 900;
+            height: 38px; justify-content: center; letter-spacing: .06em;
+            padding: 0 14px; text-transform: uppercase; text-decoration: none;
+            border: none; cursor: pointer; transition: background .15s;
+        }
+        .cartbar__cta:hover { background: #c9491a; }
+
+        /* ── FOOTER ── */
+        .sp-footer {
+            background-color: #fff;
+            background-image: url(https://www.smashpoint.hu/img/smash/footerbg.svg);
+            background-position: top; background-repeat: no-repeat; background-size: cover;
+            color: #fff; overflow: hidden; padding: 400px 0 64px; position: relative;
+        }
+        .sp-footer__inner { position: relative; z-index: 1; }
+        .sp-footer__grid {
+            display: grid; gap: 44px;
+            grid-template-columns: 1.25fr .7fr .7fr 1fr; align-items: start;
+        }
+        .sp-footer__logo img { display: block; height: auto; width: 300px; }
+        .sp-footer__desc { font-family: 'Montserrat',sans-serif; font-size: 13px; line-height: 1.7; margin: 18px 0; max-width: 320px; opacity: .92; }
+        .sp-footer__social { display: flex; gap: 14px; margin-top: 18px; }
+        .sp-footer__social-link img { display: block; height: 30px; width: 30px; }
+        .sp-footer__links { display: flex; flex-direction: column; gap: 12px; margin-top: 52px; }
+        .sp-footer__link { color: rgba(255,255,255,.92); font-family: 'Montserrat',sans-serif; font-size: 14px; line-height: 1.2; text-decoration: none; }
+        .sp-footer__link:hover { color: #fff; }
+        .sp-footer__contact { font-family: 'Montserrat',sans-serif; font-size: 13px; line-height: 1.8; margin-top: 52px; opacity: .92; }
+        .sp-footer__bottom { font-family: 'Montserrat',sans-serif; font-size: 12px; margin-top: 76px; opacity: .9; text-align: center; }
+
+        @media (max-width: 1023px) {
+            .desktop-nav { display: none; }
+            .mobile-wrap { display: flex; }
+            .order-grid { grid-template-columns: 1fr; }
+            .sp-footer { padding: 500px 0 52px; background-size: cover; }
+            .sp-footer__grid { gap: 26px; grid-template-columns: 1fr; }
+            .sp-footer__links, .sp-footer__contact { margin-top: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+    <div class="sp-container menu">
+        <a href="index.html" class="logo">
+            <img src="https://www.smashpoint.hu/img/smash/logoheader.webp" alt="Smash Point">
+        </a>
+        <nav class="desktop-nav">
+            <a href="index.html">KEZDŐLAP</a>
+            <a href="index.html#rolunk">RÓLUNK</a>
+            <a href="index.html#etlap">ÉTLAP / ITALLAP</a>
+            <a href="index.html#velemenyek">VÉLEMÉNYEK</a>
+            <a href="index.html#gyik">GYIK</a>
+            <a href="rendeles.html" class="cart-link active" aria-label="Kosár">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" class="cart-icon">
+                    <path d="M104,216a16,16,0,1,1-16-16A16,16,0,0,1,104,216Zm88-16a16,16,0,1,0,16,16A16,16,0,0,0,192,200ZM239.71,74.14l-25.64,92.28A24.06,24.06,0,0,1,191,184H92.16A24.06,24.06,0,0,1,69,166.42L33.92,40H16a8,8,0,0,1,0-16H40a8,8,0,0,1,7.71,5.86L57.19,64H232a8,8,0,0,1,7.71,10.14ZM221.47,80H61.64l22.81,82.14A8,8,0,0,0,92.16,168H191a8,8,0,0,0,7.71-5.86Z"/>
+                </svg>
+                <span class="cart-badge" id="hdr-badge" style="display:none"></span>
+            </a>
+        </nav>
+        <div class="mobile-wrap">
+            <a href="rendeles.html" class="cart-link" aria-label="Kosár">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" class="cart-icon">
+                    <path d="M104,216a16,16,0,1,1-16-16A16,16,0,0,1,104,216Zm88-16a16,16,0,1,0,16,16A16,16,0,0,0,192,200ZM239.71,74.14l-25.64,92.28A24.06,24.06,0,0,1,191,184H92.16A24.06,24.06,0,0,1,69,166.42L33.92,40H16a8,8,0,0,1,0-16H40a8,8,0,0,1,7.71,5.86L57.19,64H232a8,8,0,0,1,7.71,10.14ZM221.47,80H61.64l22.81,82.14A8,8,0,0,0,92.16,168H191a8,8,0,0,0,7.71-5.86Z"/>
+                </svg>
+            </a>
+            <button class="mobile-toggle" id="mob-toggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+    <div class="mobile-nav-drawer" id="mob-drawer">
+        <a href="index.html">KEZDŐLAP</a>
+        <a href="index.html#rolunk">RÓLUNK</a>
+        <a href="index.html#etlap">ÉTLAP / ITALLAP</a>
+        <a href="index.html#velemenyek">VÉLEMÉNYEK</a>
+        <a href="index.html#gyik">GYIK</a>
+    </div>
+</header>
+
+<!-- ═══ ORDER PAGE ═══ -->
+<main class="order-page">
+    <div class="sp-container order-inner">
+        <h1 class="order-title">Megrendelés</h1>
+        <div class="order-grid">
+
+            <!-- FORM (left, 1.1fr) -->
+            <section class="order-form" id="order-form-section">
+                <div class="order-field">
+                    <label class="order-label">Név *</label>
+                    <input type="text" class="order-input" id="f-nev" placeholder="">
+                </div>
+                <div class="order-field">
+                    <label class="order-label">Email *</label>
+                    <input type="email" class="order-input" id="f-email" placeholder="">
+                </div>
+                <div class="order-field">
+                    <label class="order-label">Telefonszám *</label>
+                    <input type="tel" class="order-input" id="f-tel" placeholder="">
+                </div>
+                <div class="order-field">
+                    <label class="order-label">Cím *</label>
+                    <textarea class="order-textarea" rows="3" id="f-cim"></textarea>
+                </div>
+                <div class="order-field">
+                    <label class="order-label">Fizetés</label>
+                    <select class="order-input" id="f-fizetes">
+                        <option>Készpénz</option>
+                        <option>Bankkártya</option>
+                        <option>SZÉP kártya</option>
+                    </select>
+                </div>
+                <div class="order-field">
+                    <label class="order-label">Megjegyzés</label>
+                    <textarea class="order-textarea" rows="3" id="f-megjegyzes"></textarea>
+                </div>
+                <div class="order-field order-consent">
+                    <label class="order-consent-label">
+                        <input type="checkbox" class="order-consent-checkbox" id="f-gdpr">
+                        <span> Elolvastam és elfogadom az <a href="adatvedelmi-tajekoztato.html" class="order-consent-link">Adatkezelési Tájékoztatót</a> . </span>
+                    </label>
+                </div>
+                <div class="order-error" id="order-error"></div>
+                <button type="button" class="order-submit" id="submit-btn" onclick="submitOrder()">Rendelés leadása</button>
+
+                <div class="order-success" id="order-success">
+                    <p class="order-success-title">Köszönjük a rendelésedet! Hamarosan felvesszük veled a kapcsolatot.</p>
+                    <button class="order-back" onclick="location.href='index.html'">← Vissza a főoldalra</button>
+                </div>
+            </section>
+
+            <!-- SUMMARY (right, .9fr) -->
+            <aside class="order-summary">
+                <div class="order-summary-title">Kosár</div>
+                <div id="cart-contents">
+                    <div class="order-empty" id="cart-empty"> A kosár üres. </div>
+                </div>
+                <div class="order-total" id="order-total" style="display:none;">
+                    <span class="order-total-label">Összesen</span>
+                    <span class="order-total-value" id="total-val"></span>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+</main>
+
+<!-- ═══ CARTBAR (fixed bottom, visible when cart has items) ═══ -->
+<div class="cartbar" id="cartbar">
+    <div class="cartbar__inner">
+        <div class="cartbar__left">
+            <span class="cartbar__label">Kosár</span>
+            <span class="cartbar__value" id="cartbar-val"></span>
+        </div>
+        <button class="cartbar__cta" onclick="submitOrder()">Rendelés leadása</button>
+    </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="sp-footer" id="CONTACT">
+    <div class="sp-container sp-footer__inner">
+        <div class="sp-footer__grid">
+            <div class="sp-footer__col">
+                <a href="index.html" class="sp-footer__logo" aria-label="Smash Point">
+                    <img src="https://www.smashpoint.hu/img/smash/logofooter.webp" alt="Smash Point">
+                </a>
+                <p class="sp-footer__desc">Gyere el finom burgerekért és frissítő italokért egy barátságos, otthonos környezetbe — ahol minden látogatás igazi élmény.</p>
+                <div class="sp-footer__social">
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="sp-footer__social-link">
+                        <img src="https://www.smashpoint.hu/img/smash/facebook-white.svg" alt="Facebook">
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="sp-footer__social-link">
+                        <img src="https://www.smashpoint.hu/img/smash/instagram-white.svg" alt="Instagram">
+                    </a>
+                    <a href="https://www.youtube.com" target="_blank" rel="noopener" aria-label="YouTube" class="sp-footer__social-link">
+                        <img src="https://www.smashpoint.hu/img/smash/youtube-white.svg" alt="YouTube">
+                    </a>
+                </div>
+            </div>
+            <div class="sp-footer__col">
+                <div class="sp-footer__links">
+                    <a href="index.html#rolunk" class="sp-footer__link">Rólunk</a>
+                    <a href="index.html" class="sp-footer__link">Kezdőlap</a>
+                    <a href="index.html#etlap" class="sp-footer__link">Étlap / Itallap</a>
+                </div>
+            </div>
+            <div class="sp-footer__col">
+                <div class="sp-footer__links">
+                    <a href="index.html#velemenyek" class="sp-footer__link">Vélemények</a>
+                    <a href="index.html#gyik" class="sp-footer__link">GYIK</a>
+                </div>
+            </div>
+            <div class="sp-footer__col">
+                <div class="sp-footer__contact">
+                    <div> Nagykőrös, Deák tér 1, Nagykőrös </div>
+                    <div>2750</div>
+                    <div>info@smashpoint.hu</div>
+                </div>
+            </div>
+        </div>
+        <div class="sp-footer__bottom"> ©2026 Smash Point Nagykőrös — Minden jog fenntartva. </div>
+    </div>
+</footer>
+
+<script>
+    // ── Mobile menu ──
+    const mobToggle = document.getElementById('mob-toggle');
+    const mobDrawer = document.getElementById('mob-drawer');
+    mobToggle.addEventListener('click', () => {
+        mobToggle.classList.toggle('open');
+        mobDrawer.classList.toggle('open');
+    });
+
+    // ── Cart state ──
+    let cart = JSON.parse(sessionStorage.getItem('sp_cart') || '{}');
+
+    function renderCart() {
+        const contents = document.getElementById('cart-contents');
+        const totalRow = document.getElementById('order-total');
+        const totalVal = document.getElementById('total-val');
+        const badge = document.getElementById('hdr-badge');
+        const cartbar = document.getElementById('cartbar');
+        const cartbarVal = document.getElementById('cartbar-val');
+
+        const items = Object.values(cart).filter(i => i.qty > 0);
+        const totalQty = items.reduce((s, i) => s + i.qty, 0);
+        const totalPrice = items.reduce((s, i) => s + i.price * i.qty, 0);
+
+        if (items.length === 0) {
+            contents.innerHTML = '<div class="order-empty"> A kosár üres. </div>';
+            totalRow.style.display = 'none';
+            cartbar.classList.remove('visible');
+        } else {
+            let html = '<div class="order-items">';
+            items.forEach(item => {
+                const sub = item.price * item.qty;
+                html += `<div class="order-item">
+                    <div class="order-item-name">${item.name}</div>
+                    <div class="order-item-meta">
+                        <button class="qty-btn" onclick="changeQty('${item.id}',-1)">−</button>
+                        <span class="qty">${item.qty}</span>
+                        <button class="qty-btn" onclick="changeQty('${item.id}',1)">+</button>
+                        <span class="order-item-price">${sub.toLocaleString('hu-HU')} ft</span>
+                    </div>
+                    <button class="remove" onclick="removeItem('${item.id}')">Eltávolítás</button>
+                </div>`;
+            });
+            html += '</div>';
+            contents.innerHTML = html;
+            totalVal.textContent = totalPrice.toLocaleString('hu-HU') + ' ft';
+            totalRow.style.display = 'flex';
+            cartbarVal.textContent = items.map(i => `${i.name} ×${i.qty}`).join(', ');
+            cartbar.classList.add('visible');
+        }
+
+        // header badge
+        if (badge) {
+            badge.textContent = totalQty;
+            badge.style.display = totalQty > 0 ? 'inline-flex' : 'none';
+        }
+
+        sessionStorage.setItem('sp_cart', JSON.stringify(cart));
+    }
+
+    function changeQty(id, delta) {
+        if (!cart[id]) return;
+        cart[id].qty += delta;
+        if (cart[id].qty <= 0) delete cart[id];
+        renderCart();
+    }
+
+    function removeItem(id) {
+        delete cart[id];
+        renderCart();
+    }
+
+    // ── Submit ──
+    function submitOrder() {
+        const errEl = document.getElementById('order-error');
+        const totalQty = Object.values(cart).reduce((s, i) => s + i.qty, 0);
+
+        if (totalQty === 0) {
+            errEl.textContent = 'A kosár üres. Kérjük, válassz burgert a főoldalon.';
+            errEl.style.display = 'block';
+            return;
+        }
+        const nev = document.getElementById('f-nev').value.trim();
+        const email = document.getElementById('f-email').value.trim();
+        const tel = document.getElementById('f-tel').value.trim();
+        const cim = document.getElementById('f-cim').value.trim();
+        if (!nev || !email || !tel || !cim) {
+            errEl.textContent = 'Kérjük, töltsd ki az összes kötelező mezőt!';
+            errEl.style.display = 'block';
+            return;
+        }
+        if (!document.getElementById('f-gdpr').checked) {
+            errEl.textContent = 'Kérjük, fogadd el az Adatkezelési Tájékoztatót!';
+            errEl.style.display = 'block';
+            return;
+        }
+        errEl.style.display = 'none';
+
+        const btn = document.getElementById('submit-btn');
+        btn.disabled = true;
+        btn.textContent = 'Feldolgozás...';
+
+        setTimeout(() => {
+            document.getElementById('order-form-section').querySelectorAll('.order-field, .order-error, .order-submit').forEach(el => el.style.display = 'none');
+            document.getElementById('order-success').style.display = 'block';
+            document.getElementById('cartbar').classList.remove('visible');
+            sessionStorage.removeItem('sp_cart');
+        }, 900);
+    }
+
+    // init
+    renderCart();
+</script>
+</body>
+</html>

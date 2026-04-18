@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smash Point Nagykőrös - Smash Burger</title>
+    <meta name="description" content="Frissen sütött smash burger dupla marhahússal és olvadó cheddarral. Nagykőrös, Deák tér 1.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Anton&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Lato:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* ── RESET ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --orange: #f15a24;
+            --orange-dark: #c9491a;
+            --white: #ffffff;
+            --black: #111111;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #fff;
+            color: #111;
+            overflow-x: hidden;
+        }
+
+        /* ── CONTAINER ── */
+        .sp-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* ── HEADER ── */
+        header {
+            position: relative;
+            z-index: 50;
+            background: var(--orange);
+            padding: 1.1rem 0;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            display: block;
+            height: 25px;
+            width: auto;
+        }
+
+        nav.desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        nav.desktop-nav a {
+            font-size: 12px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.95);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color .18s;
+        }
+        nav.desktop-nav a:hover { color: #fff; }
+
+        .cart-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255,255,255,.85);
+            border-radius: 999px;
+            color: rgba(255,255,255,.95);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            height: 36px;
+            letter-spacing: .12em;
+            padding: 0 12px;
+            text-decoration: none;
+            text-transform: uppercase;
+            gap: 8px;
+        }
+        .cart-link:hover { border-color: #fff; color: #fff; }
+
+        .cart-icon { width: 18px; height: 18px; flex-shrink: 0; }
+
+        .cart-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border-radius: 999px;
+            color: var(--orange);
+            font-size: 11px;
+            font-weight: 900;
+            height: 22px;
+            min-width: 22px;
+            padding: 0 6px;
+        }
+
+        /* mobile nav */
+        .mobile-nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .mobile-nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #fff;
+            border-radius: 2px;
+            transition: transform .3s, opacity .3s;
+        }
+        .mobile-nav-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .mobile-nav-toggle.open span:nth-child(2) { opacity: 0; }
+        .mobile-nav-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        .mobile-nav-wrap {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height .3s ease;
+            background: var(--orange);
+        }
+        .mobile-nav-wrap.open { max-height: 400px; border-top: 1px solid rgba(255,255,255,.2); }
+        .mobile-nav-wrap a {
+            display: block;
+            padding: 16px 28px;
+            font-size: 12px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.95);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,.15);
+            font-weight: 500;
+        }
+        .mobile-nav-wrap a:hover { color: #fff; }
+
+        .mobile-top {
+            display: none;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            background: var(--orange);
+            min-height: 100vh;
+        }
+
+        .hero-grid {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 4.25rem 0 5.25rem;
+        }
+
+        .kicker {
+            color: rgba(255,255,255,.85);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            letter-spacing: .22em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            color: #fff;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(62px, 6.6vw, 96px);
+            letter-spacing: .02em;
+            line-height: .92;
+            margin: 0 0 18px;
+        }
+        .hero-title span { display: block; }
+
+        .hero-sub {
+            color: rgba(255,255,255,.9);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            margin: 0 0 26px;
+            max-width: 42ch;
+            line-height: 1.5;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,.92);
+            border-radius: 3px;
+            color: var(--orange);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            height: 48px;
+            letter-spacing: .12em;
+            padding: 0 26px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background .18s;
+        }
+        .hero-cta:hover { background: #fff; }
+
+        .hero-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .hero-image {
+            display: block;
+            filter: drop-shadow(0 18px 28px rgba(0,0,0,.22));
+            height: min(640px, 72vh);
+            max-width: none;
+            transform: translateY(10px);
+            width: auto;
+        }
+
+        /* ── SERVICES ── */
+        .services-section {
+            background: #fff;
+            padding: 80px 0 96px;
+        }
+
+        .services-heading {
+            margin-bottom: 96px;
+            text-align: center;
+        }
+
+        .heading-title {
+            color: var(--orange);
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(46px, 4.4vw, 62px);
+            font-weight: 900;
+            letter-spacing: .03em;
+            line-height: 1.05;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+            padding-top: 20px;
+        }
+
+        .card {
+            border: 2px solid;
+            border-radius: 10px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            min-height: 560px;
+            overflow: visible;
+            padding: 32px 28px 36px;
+            text-align: center;
+        }
+
+        .card-image-wrap {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 300px;
+            margin-bottom: 14px;
+            margin-top: -135px;
+        }
+
+        .card-image {
+            filter: drop-shadow(0 12px 18px rgba(0,0,0,.22));
+            height: 280px;
+            object-fit: contain;
+            object-position: center;
+            width: 340px;
+        }
+
+        .card-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 34px;
+            letter-spacing: .02em;
+            margin: 6px 0 12px;
+            text-transform: uppercase;
+        }
+
+        .card-desc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            margin: 0 0 18px;
+            opacity: .95;
+            white-space: pre-line;
+        }
+
+        .card-price {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            margin-bottom: 22px;
+        }
+
+        .card-price-promo {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .06em;
+            margin-bottom: 6px;
+            opacity: .95;
+            text-transform: uppercase;
+        }
+
+        .card-price-row {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .card-price-old {
+            font-size: 14px;
+            opacity: .85;
+            text-decoration: line-through;
+            text-decoration-thickness: 2px;
+        }
+
+        .card-price-now {
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .card-btn {
+            display: inline-flex;
+            align-items: center;
+            align-self: center;
+            background: transparent;
+            border: 2px solid rgba(255,255,255,.85);
+            border-radius: 10px;
+            color: rgba(255,255,255,.92);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            height: 44px;
+            justify-content: center;
+            margin-top: auto;
+            padding: 0 34px;
+            cursor: pointer;
+            transition: background .18s, color .18s, border-color .18s;
+            letter-spacing: .06em;
+        }
+        .card-btn:hover, .card-btn.is-added {
+            background: rgba(255,255,255,.92);
+            border-color: rgba(255,255,255,.92);
+            color: var(--orange);
+        }
+
+        /* ── DELIVERY ── */
+        .delivery {
+            background: #fff;
+            overflow-x: clip;
+            overflow-y: visible;
+            padding: 500px 0 200px;
+            position: relative;
+        }
+
+        .delivery-inner {
+            min-height: 680px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .delivery-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 22px;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+
+        .delivery-title {
+            color: var(--orange);
+            font-family: 'Anton', sans-serif;
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: .02em;
+            line-height: 1.02;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .delivery-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: 2px solid var(--orange);
+            border-radius: 6px;
+            box-shadow: 0 3px rgba(241,90,36,.55);
+            color: var(--orange);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            height: 42px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 0 28px;
+            transition: background .18s, color .18s;
+        }
+        .delivery-btn:hover { background: var(--orange); color: #fff; }
+
+        .delivery-decos {
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .deco {
+            display: block;
+            height: auto;
+            position: absolute;
+            user-select: none;
+            width: auto;
+            z-index: 1;
+        }
+
+        .deco-jalapeno {
+            left: -140px;
+            max-width: 560px;
+            top: -470px;
+            width: min(560px, 56vw);
+        }
+
+        .deco-fries {
+            bottom: -240px;
+            left: auto;
+            max-width: 720px;
+            right: -90px;
+            width: min(720px, 70vw);
+        }
+
+        /* ── FEEDBACK / FAQ ── */
+        .ff-section {
+            background: #fff;
+            padding: 120px 0;
+        }
+
+        .ff-heading {
+            color: var(--orange);
+            font-family: 'Anton', sans-serif;
+            font-size: 62px;
+            font-weight: 900;
+            letter-spacing: .02em;
+            line-height: 1.02;
+            margin: 0;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .ff-heading--faq {
+            margin-top: 200px;
+        }
+
+        .reviews {
+            display: grid;
+            gap: 26px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            justify-content: center;
+            margin-top: 56px;
+        }
+
+        .review-card {
+            border: 2px solid var(--orange);
+            border-radius: 14px;
+            box-shadow: 4px 2px 2px var(--orange);
+            padding: 30px 34px 26px;
+            text-align: center;
+        }
+
+        .review-text {
+            color: #111;
+            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-style: italic;
+            font-weight: 700;
+            line-height: 1.45;
+            margin: 0 0 12px;
+            white-space: pre-line;
+        }
+
+        .review-name {
+            color: #111;
+            font-family: 'Lato', sans-serif;
+            font-size: 25px;
+            font-weight: 900;
+            margin-top: 4px;
+        }
+
+        .review-stars {
+            color: #f0b400;
+            font-size: 13px;
+            letter-spacing: .08em;
+            margin-top: 8px;
+        }
+
+        /* FAQ */
+        .faq { margin-top: 50px; }
+
+        .faq-item {
+            border: 2px solid var(--orange);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .faq-item + .faq-item { margin-top: 12px; }
+
+        .faq-q {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 16px 18px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .faq-q-text {
+            color: var(--orange);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .faq-icon {
+            border: 2px solid var(--orange);
+            border-radius: 999px;
+            flex: 0 0 auto;
+            height: 18px;
+            position: relative;
+            width: 18px;
+        }
+
+        .faq-icon-line {
+            background: var(--orange);
+            height: 2px;
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            transition: opacity .25s;
+        }
+
+        .faq-icon-line--v {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+
+        .faq-item.open .faq-icon-line--v { opacity: 0; }
+
+        .faq-a {
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.55;
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .35s ease, padding .3s;
+        }
+        .faq-item.open .faq-a {
+            max-height: 200px;
+            padding: 0 18px 18px;
+        }
+
+        /* ── CTA BUTTONS SECTION ── */
+        .sp-cta {
+            background: #fff;
+            padding: 0 0 120px;
+        }
+        .sp-cta__inner {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .sp-cta__btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border: 2px solid var(--orange);
+            border-radius: 999px;
+            color: var(--orange);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: .08em;
+            min-height: 42px;
+            padding: 10px 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        .sp-cta__btn--primary {
+            background: var(--orange);
+            color: #fff;
+        }
+        @keyframes spPulse {
+            0%, to { box-shadow: 0 0 rgba(241,90,36,.38); transform: scale(1); }
+            50% { box-shadow: 0 0 0 10px rgba(241,90,36,0); transform: scale(1.06); }
+        }
+        .sp-cta__btn--pulse { animation: spPulse 1.8s ease-in-out infinite; }
+
+        /* ── FOOTER ── */
+        .sp-footer {
+            background-color: #fff;
+            background-image: url(https://www.smashpoint.hu/img/smash/footerbg.svg);
+            background-position: top;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: #fff;
+            overflow: hidden;
+            padding: 400px 0 64px;
+            position: relative;
+        }
+
+        .sp-footer__inner { position: relative; z-index: 1; }
+
+        .sp-footer__grid {
+            display: grid;
+            gap: 44px;
+            grid-template-columns: 1.25fr .7fr .7fr 1fr;
+            align-items: start;
+        }
+
+        .sp-footer__logo img {
+            display: block;
+            height: auto;
+            width: 300px;
+        }
+
+        .sp-footer__desc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            line-height: 1.7;
+            margin: 18px 0;
+            max-width: 320px;
+            opacity: .92;
+        }
+
+        .sp-footer__social {
+            display: flex;
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .sp-footer__social-link img {
+            display: block;
+            height: 30px;
+            width: 30px;
+        }
+
+        .sp-footer__links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 52px;
+        }
+
+        .sp-footer__link {
+            color: rgba(255,255,255,.92);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            line-height: 1.2;
+            text-decoration: none;
+        }
+        .sp-footer__link:hover { color: #fff; }
+
+        .sp-footer__contact {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            line-height: 1.8;
+            margin-top: 52px;
+            opacity: .92;
+        }
+
+        .sp-footer__bottom {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            margin-top: 76px;
+            opacity: .9;
+            text-align: center;
+        }
+
+        /* ── BACK TO TOP ── */
+        .back-to-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 50;
+            background: var(--orange);
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 24px rgba(241,90,36,.4);
+            transition: background .2s, transform .2s;
+        }
+        @keyframes bttPulse {
+            0%, to { transform: scale(1); box-shadow: 0 0 rgba(241,90,36,.38); }
+            50% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(241,90,36,0); }
+        }
+        .back-to-top { animation: bttPulse 2s infinite; }
+        .back-to-top:hover { background: #000; animation: none; }
+        .back-to-top svg { width: 24px; height: 24px; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1023px) {
+            nav.desktop-nav { display: none; }
+            .mobile-nav-toggle { display: flex; }
+            .mobile-top { display: flex; }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                padding: 3.25rem 0 4.25rem;
+                text-align: center;
+            }
+            .hero-right { justify-content: center; order: -1; }
+            .hero-image { height: min(520px, 42vh); max-width: 100%; transform: none; width: auto; }
+            .hero-sub { margin-left: auto; margin-right: auto; }
+
+            .cards { gap: 90px; grid-template-columns: minmax(0, 360px); justify-content: center; }
+            .card { min-height: unset; }
+            .card-image-wrap { height: 260px; margin-top: -110px; }
+            .card-image { height: 240px; width: 300px; }
+
+            .delivery { padding: 150px 0 140px; }
+            .delivery-inner { min-height: 540px; }
+            .deco-jalapeno { left: -120px; top: -200px; width: 240px; opacity: .95; z-index: 1; }
+            .deco-fries { bottom: -170px; left: auto; right: -120px; width: 400px; opacity: .95; z-index: 1; }
+            .delivery-title { font-size: clamp(44px, 4.6vw, 66px); }
+
+            .ff-section { padding: 96px 0; }
+            .ff-heading { font-size: 48px; }
+            .ff-heading--faq { margin-top: 96px; }
+            .reviews { grid-template-columns: minmax(0, 520px); }
+
+            .sp-footer { background-size: cover; padding: 500px 0 52px; }
+            .sp-footer__grid { gap: 26px; grid-template-columns: 1fr; }
+            .sp-footer__links, .sp-footer__contact { margin-top: 22px; }
+        }
+
+        @media (max-width: 767px) {
+            .services-section { padding: 70px 0 90px; }
+            .delivery-title { font-size: 54px; }
+            .review-name { font-size: 20px; }
+            .faq-q-text, .faq-a { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+    <div class="sp-container header-inner">
+        <a href="#" class="logo" aria-label="Smash Point kezdőlap">
+            <img src="https://www.smashpoint.hu/img/smash/logoheader.webp" alt="Smash Point">
+        </a>
+        <nav class="desktop-nav">
+            <a href="#">KEZDŐLAP</a>
+            <a href="#rolunk">RÓLUNK</a>
+            <a href="#etlap">ÉTLAP / ITALLAP</a>
+            <a href="#velemenyek">VÉLEMÉNYEK</a>
+            <a href="#gyik">GYIK</a>
+            <a href="rendeles.html" class="cart-link" aria-label="Kosár">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" class="cart-icon">
+                    <path d="M104,216a16,16,0,1,1-16-16A16,16,0,0,1,104,216Zm88-16a16,16,0,1,0,16,16A16,16,0,0,0,192,200ZM239.71,74.14l-25.64,92.28A24.06,24.06,0,0,1,191,184H92.16A24.06,24.06,0,0,1,69,166.42L33.92,40H16a8,8,0,0,1,0-16H40a8,8,0,0,1,7.71,5.86L57.19,64H232a8,8,0,0,1,7.71,10.14ZM221.47,80H61.64l22.81,82.14A8,8,0,0,0,92.16,168H191a8,8,0,0,0,7.71-5.86Z"/>
+                </svg>
+            </a>
+        </nav>
+        <div class="mobile-top">
+            <a href="rendeles.html" class="cart-link" aria-label="Kosár">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" class="cart-icon">
+                    <path d="M104,216a16,16,0,1,1-16-16A16,16,0,0,1,104,216Zm88-16a16,16,0,1,0,16,16A16,16,0,0,0,192,200ZM239.71,74.14l-25.64,92.28A24.06,24.06,0,0,1,191,184H92.16A24.06,24.06,0,0,1,69,166.42L33.92,40H16a8,8,0,0,1,0-16H40a8,8,0,0,1,7.71,5.86L57.19,64H232a8,8,0,0,1,7.71,10.14ZM221.47,80H61.64l22.81,82.14A8,8,0,0,0,92.16,168H191a8,8,0,0,0,7.71-5.86Z"/>
+                </svg>
+            </a>
+            <button class="mobile-nav-toggle" id="mob-toggle" aria-label="Menü">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+    <div class="mobile-nav-wrap" id="mob-nav">
+        <a href="#" onclick="closeMob()">KEZDŐLAP</a>
+        <a href="#rolunk" onclick="closeMob()">RÓLUNK</a>
+        <a href="#etlap" onclick="closeMob()">ÉTLAP / ITALLAP</a>
+        <a href="#velemenyek" onclick="closeMob()">VÉLEMÉNYEK</a>
+        <a href="#gyik" onclick="closeMob()">GYIK</a>
+    </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="kezdolap">
+    <div class="sp-container">
+        <div class="hero-grid">
+            <div class="hero-left">
+                <p class="kicker">SMASH IT - EAT IT - LOVE IT</p>
+                <h1 class="hero-title">
+                    <span>SMASH</span>
+                    <span>BURGER</span>
+                </h1>
+                <p class="hero-sub">Frissen sütött, dupla marhahússal és olvadó cheddarral. Egyszerű, őszinte ízek — gyorsan az asztalodon.</p>
+                <a href="menu.html" class="hero-cta">RENDELÉS</a>
+            </div>
+            <div class="hero-right" aria-hidden="true">
+                <img src="https://www.smashpoint.hu/img/smash/hero.webp" alt="" class="hero-image">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ SERVICES / ÉTLAP ═══ -->
+<section class="services-section" id="etlap">
+    <div class="sp-container">
+        <div class="services-heading">
+            <h2 class="heading-title">VÁLASZD KI<br>A KEDVENCED</h2>
+        </div>
+        <div class="cards">
+
+            <!-- CLASSIC -->
+            <article class="card" style="background-color:#ff944b; border-color:#c7652c;">
+                <div class="card-image-wrap">
+                    <img src="https://www.smashpoint.hu/img/smash/classic.webp" alt="CLASSIC" class="card-image">
+                </div>
+                <h3 class="card-title">CLASSIC</h3>
+                <p class="card-desc">vajas buci · dupla marhahús
+cheddar sajt · hagyma · uborka
+ketchup · mustár</p>
+                <div class="card-price">
+                    <div class="card-price-promo">Tavaszi akció</div>
+                    <div class="card-price-row">
+                        <span class="card-price-old">1990 ft</span>
+                        <span class="card-price-now">1790 ft</span>
+                    </div>
+                </div>
+                <button class="card-btn" onclick="addToCart('classic','CLASSIC',1790)">Kosárba</button>
+            </article>
+
+            <!-- HOUSE -->
+            <article class="card" style="background-color:#f15a24; border-color:#c9491a;">
+                <div class="card-image-wrap">
+                    <img src="https://www.smashpoint.hu/img/smash/hause.webp" alt="HOUSE" class="card-image">
+                </div>
+                <h3 class="card-title">HOUSE</h3>
+                <p class="card-desc">vajas buci · dupla marhahús
+cheddar sajt · hagyma · uborka házi
+szósz</p>
+                <div class="card-price">
+                    <div class="card-price-promo">Tavaszi akció</div>
+                    <div class="card-price-row">
+                        <span class="card-price-old">1990 ft</span>
+                        <span class="card-price-now">1790 ft</span>
+                    </div>
+                </div>
+                <button class="card-btn" onclick="addToCart('house','HOUSE',1790)">Kosárba</button>
+            </article>
+
+            <!-- JALAPEÑO -->
+            <article class="card" style="background-color:#eb7323; border-color:#c45d14;">
+                <div class="card-image-wrap">
+                    <img src="https://www.smashpoint.hu/img/smash/jalapeno.webp" alt="JALAPEÑO" class="card-image">
+                </div>
+                <h3 class="card-title">JALAPEÑO</h3>
+                <p class="card-desc">vajas buci · dupla marhahús
+cheddar sajt · hagyma · uborka
+jalapeño · ketchup · mustár</p>
+                <div class="card-price">
+                    <div class="card-price-row">
+                        <span class="card-price-now">2390 ft</span>
+                    </div>
+                </div>
+                <button class="card-btn" onclick="addToCart('jalapeno','JALAPEÑO',2390)">Kosárba</button>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══ DELIVERY ═══ -->
+<section class="delivery" id="delivery">
+    <div class="sp-container delivery-inner">
+        <div class="delivery-decos" aria-hidden="true">
+            <img src="https://www.smashpoint.hu/img/smash/jalapenobg.svg" alt="" class="deco deco-jalapeno">
+            <img src="https://www.smashpoint.hu/img/smash/krumpli.svg" alt="" class="deco deco-fries">
+        </div>
+        <div class="delivery-content">
+            <h2 class="delivery-title">RENDELD HÁZHOZ</h2>
+            <a href="rendeles.html" class="delivery-btn">Rendelés</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ VISSZAJELZÉSEK + GYIK ═══ -->
+<section class="ff-section" id="velemenyek">
+    <div class="sp-container">
+
+        <h2 class="ff-heading">VISSZAJELZÉSEK</h2>
+
+        <div class="reviews">
+            <article class="review-card">
+                <p class="review-text">"Nagyon finom volt a hamburger és a sült krumpli is.
+Gyors kiszolgálás. Ide még biztos jövök!"</p>
+                <div class="review-name">Krisztina Hay</div>
+                <div class="review-stars" aria-label="5 csillag">★★★★★</div>
+            </article>
+            <article class="review-card">
+                <p class="review-text">"Imádjuk a Smash hamburgert!
+Kiváló minőség, kiváló kiszolgálás!"</p>
+                <div class="review-name">Éva Pap</div>
+                <div class="review-stars" aria-label="5 csillag">★★★★★</div>
+            </article>
+        </div>
+
+        <h2 class="ff-heading ff-heading--faq" id="gyik">GYAKORI KÉRDÉSEK</h2>
+
+        <div class="faq">
+
+            <div class="faq-item open">
+                <button class="faq-q" type="button">
+                    <span class="faq-q-text">Mi az a Smashburger?</span>
+                    <span class="faq-icon is-open">
+                        <span class="faq-icon-line"></span>
+                        <span class="faq-icon-line faq-icon-line--v"></span>
+                    </span>
+                </button>
+                <div class="faq-a">A smash burger lényege, hogy a húspogácsát forró sütőlapon lapítjuk szét, így extra ropogós kérget kap, miközben belül szaftos marad.</div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" type="button">
+                    <span class="faq-q-text">Miért lesz ropogósabb a smash technikától?</span>
+                    <span class="faq-icon">
+                        <span class="faq-icon-line"></span>
+                        <span class="faq-icon-line faq-icon-line--v"></span>
+                    </span>
+                </button>
+                <div class="faq-a">Amikor a húst a forró felületre nyomjuk, az érintkezési felület megnő, ami felgyorsítja a Maillard-reakciót — ez a kémiai folyamat felel a barna, ropogós kéreg kialakulásáért.</div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" type="button">
+                    <span class="faq-q-text">Milyen húsból készül a pogácsa, és miért fontos a zsírtartalom?</span>
+                    <span class="faq-icon">
+                        <span class="faq-icon-line"></span>
+                        <span class="faq-icon-line faq-icon-line--v"></span>
+                    </span>
+                </button>
+                <div class="faq-a">Friss, minőségi marhahúst használunk, amelynek zsírtartalma körülbelül 20–30%. A zsír elengedhetetlen: a nyomás hatására kiolvad, a húst belülről szaftossá, kívülről ropogóssá teszi.</div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" type="button">
+                    <span class="faq-q-text">Mennyi idő alatt érkezik ki a rendelés, és hogyan marad friss?</span>
+                    <span class="faq-icon">
+                        <span class="faq-icon-line"></span>
+                        <span class="faq-icon-line faq-icon-line--v"></span>
+                    </span>
+                </button>
+                <div class="faq-a">Minden burgert frissen, rendelésre készítünk, a felkészítési idő általában 10–15 perc. A rendelést speciális csomagolásban adjuk át, amely megőrzi a hőt és a textúrát.</div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" type="button">
+                    <span class="faq-q-text">Allergének: van glutén- vagy laktózmentes opció?</span>
+                    <span class="faq-icon">
+                        <span class="faq-icon-line"></span>
+                        <span class="faq-icon-line faq-icon-line--v"></span>
+                    </span>
+                </button>
+                <div class="faq-a">Étlapunkon jelenleg nincs külön glutén- vagy laktózmentes opció. Allergiával kapcsolatos kérdések esetén kérjük, vedd fel velünk a kapcsolatot az info@smashpoint.hu e-mail-címen.</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══ CTA BUTTONS ═══ -->
+<div class="sp-cta" id="rolunk">
+    <div class="sp-container">
+        <div class="sp-cta__inner">
+            <a href="rendeles.html" class="sp-cta__btn sp-cta__btn--primary sp-cta__btn--pulse">Rendelés leadása</a>
+            <a href="#etlap" class="sp-cta__btn">Étlap megtekintése</a>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="sp-footer" id="CONTACT">
+    <div class="sp-container sp-footer__inner">
+        <div class="sp-footer__grid">
+            <div class="sp-footer__col">
+                <a href="#" class="sp-footer__logo" aria-label="Smash Point">
+                    <img src="https://www.smashpoint.hu/img/smash/logofooter.webp" alt="Smash Point">
+                </a>
+                <p class="sp-footer__desc">Gyere el finom burgerekért és frissítő italokért egy barátságos, otthonos környezetbe — ahol minden látogatás igazi élmény.</p>
+                <div class="sp-footer__social">
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="sp-footer__social-link">
+                        <img src="https://www.smashpoint.hu/img/smash/facebook-white.svg" alt="Facebook">
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="sp-footer__social-link">
+                        <img src="https://www.smashpoint.hu/img/smash/instagram-white.svg" alt="Instagram">
+                    </a>
+                    <a href="https://www.youtube.com" target="_blank" rel="noopener" aria-label="YouTube" class="sp-footer__social-link">
+                        <img src="https://www.smashpoint.hu/img/smash/youtube-white.svg" alt="YouTube">
+                    </a>
+                </div>
+            </div>
+            <div class="sp-footer__col">
+                <div class="sp-footer__links">
+                    <a href="#rolunk" class="sp-footer__link">Rólunk</a>
+                    <a href="#" class="sp-footer__link">Kezdőlap</a>
+                    <a href="#etlap" class="sp-footer__link">Étlap / Itallap</a>
+                </div>
+            </div>
+            <div class="sp-footer__col">
+                <div class="sp-footer__links">
+                    <a href="#velemenyek" class="sp-footer__link">Vélemények</a>
+                    <a href="#gyik" class="sp-footer__link">GYIK</a>
+                </div>
+            </div>
+            <div class="sp-footer__col">
+                <div class="sp-footer__contact">
+                    <div>Nagykőrös, Deák tér 1, Nagykőrös</div>
+                    <div>2750</div>
+                    <div>info@smashpoint.hu</div>
+                </div>
+            </div>
+        </div>
+        <div class="sp-footer__bottom">©2026 Smash Point Nagykőrös — Minden jog fenntartva.</div>
+    </div>
+</footer>
+
+<!-- ═══ BACK TO TOP ═══ -->
+<button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Vissza a tetejére" aria-label="Vissza a tetejére">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+    </svg>
+</button>
+
+<script>
+    // Mobile menu
+    const toggle = document.getElementById('mob-toggle');
+    const mobNav = document.getElementById('mob-nav');
+    toggle.addEventListener('click', () => {
+        toggle.classList.toggle('open');
+        mobNav.classList.toggle('open');
+    });
+    function closeMob() {
+        toggle.classList.remove('open');
+        mobNav.classList.remove('open');
+    }
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach(i => {
+                i.classList.remove('open');
+                i.querySelector('.faq-icon').classList.remove('is-open');
+            });
+            if (!isOpen) {
+                item.classList.add('open');
+                item.querySelector('.faq-icon').classList.add('is-open');
+            }
+        });
+    });
+
+    // Cart
+    let cart = JSON.parse(sessionStorage.getItem('sp_cart') || '{}');
+
+    function updateCartBadge() {
+        const total = Object.values(cart).reduce((s, i) => s + i.qty, 0);
+        document.querySelectorAll('.cart-badge').forEach(b => b.textContent = total);
+        if (total > 0) {
+            document.querySelectorAll('.cart-link').forEach(l => {
+                if (!l.querySelector('.cart-badge')) {
+                    const badge = document.createElement('span');
+                    badge.className = 'cart-badge';
+                    badge.textContent = total;
+                    l.appendChild(badge);
+                } else {
+                    l.querySelector('.cart-badge').textContent = total;
+                }
+            });
+        }
+        sessionStorage.setItem('sp_cart', JSON.stringify(cart));
+    }
+
+    function addToCart(id, name, price) {
+        if (!cart[id]) cart[id] = { name, price, qty: 0 };
+        cart[id].qty++;
+        updateCartBadge();
+        // visual feedback
+        event.target.textContent = 'Hozzáadva ✓';
+        event.target.classList.add('is-added');
+        setTimeout(() => {
+            event.target.textContent = 'Kosárba';
+            event.target.classList.remove('is-added');
+        }, 1500);
+    }
+
+    updateCartBadge();
+</script>
+</body>
+</html>
