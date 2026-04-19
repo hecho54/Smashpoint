@@ -957,6 +957,7 @@
 
             /* video break */
             section[style*="background:#000"] p { font-size: clamp(30px, 9vw, 52px) !important; }
+            .video-text-overlay p { transform: translateY(100px); }
 
             /* location CTA */
             section[style*="padding:72px"] { padding: 40px 16px !important; }
@@ -1113,7 +1114,7 @@ jalapeño · ketchup · mustár</p>
     <video autoplay muted loop playsinline style="width:100%; max-height:520px; object-fit:cover; display:block; opacity:1;">
         <source src="Images/burgir%20es%C3%A9s%20120%20fps.mp4" type="video/mp4">
     </video>
-    <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center;">
+    <div class="video-text-overlay" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center;">
         <p style="font-family:'Anton',sans-serif; font-size:clamp(18px,5vw,96px); line-height:1; letter-spacing:.03em; text-transform:uppercase; color:#f15a24; margin:0; white-space:nowrap;">SMASH IT · EAT IT · LOVE IT</p>
     </div>
 </section>
