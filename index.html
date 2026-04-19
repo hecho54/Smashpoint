@@ -183,6 +183,17 @@
             position: relative;
         }
 
+        .hero-mob-overlay {
+            display: none;
+        }
+
+        .hero-cta--mob {
+            background: var(--orange);
+            color: #fff;
+            border: none;
+        }
+        .hero-cta--mob:hover { opacity: .88; background: var(--orange); }
+
         .hero-video {
             position: absolute;
             inset: 0;
@@ -919,15 +930,21 @@
 
             /* hero */
             .hero-grid { grid-template-columns: 1fr; }
-            .hero-left {
-                padding: 72px 20px 40px;
-                text-align: center;
+            .hero-left { display: none; }
+            .hero-video-col { height: 100svh; max-height: none; }
+            .hero-mob-overlay {
+                display: flex;
+                flex-direction: column;
                 align-items: center;
+                justify-content: center;
+                position: absolute;
+                inset: 0;
+                padding: 0 24px;
+                text-align: center;
             }
-            .hero-video-col { height: 60vw; min-height: 220px; max-height: 320px; }
-            .hero-title { font-size: clamp(44px, 14vw, 68px); margin-bottom: 14px; }
-            .hero-sub { font-size: 14px; max-width: 100%; margin-bottom: 22px; }
-            .hero-cta { align-self: center; height: 42px; font-size: 12px; padding: 0 22px; }
+            .hero-mob-overlay .hero-title { color: #f15a24; font-size: clamp(52px, 15vw, 80px); }
+            .hero-mob-overlay .hero-sub { color: rgba(255,255,255,.95); max-width: 34ch; }
+            .hero-cta--mob { height: 46px; font-size: 13px; padding: 0 32px; border-radius: 4px; }
 
             /* cards */
             .services-section { padding: 48px 0 36px; }
@@ -1014,6 +1031,10 @@
             <video class="hero-video" autoplay muted loop playsinline>
                 <source src="Images/Burgir%20vidi%202.mp4" type="video/mp4">
             </video>
+            <div class="hero-mob-overlay">
+                <p class="kicker" style="margin-bottom:28px;">SMASH IT - EAT IT - LOVE IT</p>
+                <a href="menu.html" class="hero-cta hero-cta--mob">RENDELÉS</a>
+            </div>
         </div>
     </div>
 </section>
