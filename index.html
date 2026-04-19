@@ -166,7 +166,7 @@
 
         /* ── HERO ── */
         .hero {
-            background: #000;
+            background: transparent;
             min-height: 100vh;
             position: relative;
             overflow: hidden;
@@ -178,7 +178,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: .65;
+            opacity: 1;
             pointer-events: none;
             z-index: 0;
         }
@@ -967,7 +967,7 @@
         </a>
         <nav class="desktop-nav">
             <a href="#">KEZDŐLAP</a>
-            <a href="#etlap">ÉTLAP / ITALLAP</a>
+            <a href="menu.html">ÉTLAP / ITALLAP</a>
             <a href="velemenyek.html">VÉLEMÉNYEK</a>
             <a href="gyik.html">GYIK</a>
             <a href="rendeles.html" class="cart-link" aria-label="Kosár">
@@ -989,7 +989,7 @@
     </div>
     <div class="mobile-nav-wrap" id="mob-nav">
         <a href="#" onclick="closeMob()">KEZDŐLAP</a>
-        <a href="#etlap" onclick="closeMob()">ÉTLAP / ITALLAP</a>
+        <a href="menu.html" onclick="closeMob()">ÉTLAP / ITALLAP</a>
         <a href="velemenyek.html" onclick="closeMob()">VÉLEMÉNYEK</a>
         <a href="gyik.html" onclick="closeMob()">GYIK</a>
     </div>
@@ -1000,19 +1000,6 @@
     <video class="hero-video" autoplay muted loop playsinline>
         <source src="Images/Burgir%20vidi%202.mp4" type="video/mp4">
     </video>
-    <div class="sp-container">
-        <div class="hero-grid">
-            <div class="hero-left">
-                <p class="kicker">SMASH IT - EAT IT - LOVE IT</p>
-                <h1 class="hero-title">
-                    <span>SMASH</span>
-                    <span>BURGER</span>
-                </h1>
-                <p class="hero-sub">Frissen sütött, dupla marhahússal és olvadó cheddarral. Egyszerű, őszinte ízek — gyorsan az asztalodon.</p>
-                <a href="menu.html" class="hero-cta">RENDELÉS</a>
-            </div>
-        </div>
-    </div>
 </section>
 
 <!-- ═══ SERVICES / ÉTLAP ═══ -->
