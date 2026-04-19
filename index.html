@@ -428,6 +428,10 @@
             font-weight: 900;
         }
 
+        .card-content {
+            display: contents;
+        }
+
         .card-btn {
             display: inline-flex;
             align-items: center;
@@ -950,32 +954,32 @@
             .heading-title { font-size: clamp(32px, 9vw, 48px); }
             .cards { gap: 16px !important; grid-template-columns: minmax(0,1fr) !important; }
             .card {
-                display: grid !important;
-                grid-template-columns: 140px 1fr;
+                display: flex !important;
+                flex-direction: row !important;
                 min-height: 0;
                 padding: 0 !important;
                 text-align: left;
                 overflow: hidden;
                 border-radius: 16px;
                 position: relative;
+                align-items: stretch;
             }
             .card-image-wrap {
-                grid-column: 1;
-                grid-row: 1 / 10;
-                width: 100%;
-                height: 100%;
-                min-height: 160px;
+                width: 155px;
+                min-width: 155px;
+                height: auto;
                 margin: 0;
                 overflow: hidden;
                 align-items: stretch;
                 justify-content: stretch;
                 position: relative;
+                flex-shrink: 0;
             }
             .card-image-wrap::after {
                 content: '';
                 position: absolute;
                 inset: 0;
-                background: linear-gradient(to right, transparent 50%, var(--card-bg, #f15a24) 100%);
+                background: linear-gradient(to right, transparent 55%, var(--card-bg, #f15a24) 100%);
             }
             .card-image {
                 width: 100%;
@@ -984,30 +988,39 @@
                 object-position: center;
                 filter: none;
             }
+            .card-content {
+                display: flex !important;
+                flex-direction: column;
+                flex: 1;
+                background: rgba(255,255,255,.18);
+                border-radius: 12px;
+                margin: 10px 54px 10px -20px;
+                padding: 12px 14px 12px 14px;
+                position: relative;
+                z-index: 1;
+                justify-content: center;
+            }
             .card-badge { display: none !important; }
             .card-title {
-                grid-column: 2;
-                font-size: 1.4rem;
-                padding: 14px 52px 0 14px;
-                margin: 0;
+                font-size: 1.3rem;
+                margin: 0 0 4px;
+                padding: 0;
             }
             .card-desc {
-                grid-column: 2;
                 font-size: .72rem;
-                padding: 6px 14px 0;
-                margin: 0;
+                padding: 0;
+                margin: 0 0 6px;
                 white-space: normal;
             }
             .card-price {
-                grid-column: 2;
                 font-size: 1rem;
-                padding: 6px 14px 14px;
+                padding: 0;
                 margin: 0;
             }
             .card-price-promo {
                 display: block !important;
                 font-family: 'Montserrat', sans-serif;
-                font-style: italic;
+                font-style: normal;
                 font-weight: 700;
                 font-size: 11px;
                 letter-spacing: .05em;
@@ -1015,26 +1028,26 @@
                 color: rgba(255,255,255,.9);
                 margin-bottom: 4px;
             }
-            .card-price-now { font-size: 1.2rem; }
-            .card-price-old { font-size: 1rem; }
+            .card-price-now { font-size: 1.1rem; }
+            .card-price-old { font-size: .9rem; }
             .card-btn {
                 position: absolute !important;
-                right: 12px;
+                right: 10px;
                 top: 50%;
                 transform: translateY(-50%) !important;
-                width: 46px;
-                height: 46px;
+                width: 44px;
+                height: 44px;
                 border-radius: 999px !important;
                 padding: 0 !important;
                 font-size: 0 !important;
-                background: rgba(0,0,0,.2) !important;
+                background: rgba(0,0,0,.22) !important;
                 border: none !important;
                 margin: 0;
                 min-width: 0;
             }
             .card-btn::before {
                 content: "+";
-                font-size: 28px;
+                font-size: 26px;
                 color: #fff;
                 line-height: 1;
                 display: block;
@@ -1137,19 +1150,21 @@
                 <div class="card-image-wrap">
                     <img src="https://www.smashpoint.hu/img/smash/classic.webp" alt="CLASSIC" class="card-image">
                 </div>
-                <span class="card-badge">Tavaszi akció</span>
-                <h3 class="card-title">CLASSIC</h3>
-                <p class="card-desc">vajas buci · dupla marhahús
+                <div class="card-content">
+                    <span class="card-badge">Tavaszi akció</span>
+                    <h3 class="card-title">CLASSIC</h3>
+                    <p class="card-desc">vajas buci · dupla marhahús
 cheddar sajt · hagyma · uborka
 ketchup · mustár</p>
-                <div class="card-price">
-                    <div class="card-price-promo">Tavaszi akció</div>
-                    <div class="card-price-row">
-                        <span class="card-price-old">1990 ft</span>
-                        <span class="card-price-now">1790 ft</span>
+                    <div class="card-price">
+                        <div class="card-price-promo">Tavaszi akció</div>
+                        <div class="card-price-row">
+                            <span class="card-price-old">1990 ft</span>
+                            <span class="card-price-now">1790 ft</span>
+                        </div>
                     </div>
+                    <button class="card-btn" onclick="addToCart('classic','CLASSIC',1790)">Kosárba</button>
                 </div>
-                <button class="card-btn" onclick="addToCart('classic','CLASSIC',1790)">Kosárba</button>
             </article>
 
             <!-- HOUSE -->
@@ -1157,19 +1172,21 @@ ketchup · mustár</p>
                 <div class="card-image-wrap">
                     <img src="https://www.smashpoint.hu/img/smash/hause.webp" alt="HOUSE" class="card-image">
                 </div>
-                <span class="card-badge">Tavaszi akció</span>
-                <h3 class="card-title">HOUSE</h3>
-                <p class="card-desc">vajas buci · dupla marhahús
+                <div class="card-content">
+                    <span class="card-badge">Tavaszi akció</span>
+                    <h3 class="card-title">HOUSE</h3>
+                    <p class="card-desc">vajas buci · dupla marhahús
 cheddar sajt · hagyma · uborka házi
 szósz</p>
-                <div class="card-price">
-                    <div class="card-price-promo">Tavaszi akció</div>
-                    <div class="card-price-row">
-                        <span class="card-price-old">1990 ft</span>
-                        <span class="card-price-now">1790 ft</span>
+                    <div class="card-price">
+                        <div class="card-price-promo">Tavaszi akció</div>
+                        <div class="card-price-row">
+                            <span class="card-price-old">1990 ft</span>
+                            <span class="card-price-now">1790 ft</span>
+                        </div>
                     </div>
+                    <button class="card-btn" onclick="addToCart('house','HOUSE',1790)">Kosárba</button>
                 </div>
-                <button class="card-btn" onclick="addToCart('house','HOUSE',1790)">Kosárba</button>
             </article>
 
             <!-- JALAPEÑO -->
@@ -1177,16 +1194,18 @@ szósz</p>
                 <div class="card-image-wrap">
                     <img src="https://www.smashpoint.hu/img/smash/jalapeno.webp" alt="JALAPEÑO" class="card-image">
                 </div>
-                <h3 class="card-title">JALAPEÑO</h3>
-                <p class="card-desc">vajas buci · dupla marhahús
+                <div class="card-content">
+                    <h3 class="card-title">JALAPEÑO</h3>
+                    <p class="card-desc">vajas buci · dupla marhahús
 cheddar sajt · hagyma · uborka
 jalapeño · ketchup · mustár</p>
-                <div class="card-price">
-                    <div class="card-price-row">
-                        <span class="card-price-now">2390 ft</span>
+                    <div class="card-price">
+                        <div class="card-price-row">
+                            <span class="card-price-now">2390 ft</span>
+                        </div>
                     </div>
+                    <button class="card-btn" onclick="addToCart('jalapeno','JALAPEÑO',2390)">Kosárba</button>
                 </div>
-                <button class="card-btn" onclick="addToCart('jalapeno','JALAPEÑO',2390)">Kosárba</button>
             </article>
 
         </div>
