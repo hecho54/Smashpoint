@@ -37,10 +37,16 @@
 
         /* ── HEADER ── */
         header {
-            position: relative;
+            position: fixed;
+            top: 0; left: 0; right: 0;
             z-index: 50;
             background: var(--orange);
             padding: 1.1rem 0;
+            transform: translateY(-100%);
+            transition: transform .35s cubic-bezier(.4,0,.2,1);
+        }
+        header.scrolled {
+            transform: translateY(0);
         }
 
         .header-inner {
@@ -157,21 +163,38 @@
 
         /* ── HERO ── */
         .hero {
-            background: var(--orange);
+            background: #000;
             min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: .65;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero .sp-container {
+            position: relative;
+            z-index: 1;
         }
 
         .hero-grid {
             min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1.25fr;
-            align-items: center;
-            gap: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             padding: 4.25rem 0 5.25rem;
         }
 
         .kicker {
-            color: rgba(255,255,255,.85);
+            color: rgba(255,255,255,.75);
             font-family: 'Montserrat', sans-serif;
             font-size: 13px;
             letter-spacing: .22em;
@@ -180,7 +203,7 @@
         }
 
         .hero-title {
-            color: #fff;
+            color: #f15a24;
             font-family: 'Archivo Black', sans-serif;
             font-size: clamp(62px, 6.6vw, 96px);
             letter-spacing: .02em;
@@ -190,7 +213,7 @@
         .hero-title span { display: block; }
 
         .hero-sub {
-            color: rgba(255,255,255,.9);
+            color: rgba(255,255,255,.82);
             font-family: 'Montserrat', sans-serif;
             font-size: 16px;
             margin: 0 0 26px;
@@ -202,9 +225,9 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255,255,255,.92);
+            background: var(--orange);
             border-radius: 3px;
-            color: var(--orange);
+            color: #fff;
             font-family: 'Montserrat', sans-serif;
             font-size: 13px;
             font-weight: 700;
@@ -215,7 +238,7 @@
             text-decoration: none;
             transition: background .18s;
         }
-        .hero-cta:hover { background: #fff; }
+        .hero-cta:hover { background: var(--orange-dark); }
 
         .hero-right {
             display: flex;
@@ -230,6 +253,48 @@
             max-width: none;
             transform: translateY(10px);
             width: auto;
+        }
+
+        /* ── SERVICES ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(48px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes floatBurger {
+            0%,100% { transform: translateY(0px) rotate(0deg); }
+            50%     { transform: translateY(-10px) rotate(.6deg); }
+        }
+
+        .cards-reveal .card {
+            opacity: 0;
+            transform: translateY(48px);
+        }
+        .cards-reveal.in-view .card {
+            animation: fadeUp .6s cubic-bezier(.22,.68,0,1.2) forwards;
+        }
+        .cards-reveal.in-view .card:nth-child(1) { animation-delay: .05s; }
+        .cards-reveal.in-view .card:nth-child(2) { animation-delay: .18s; }
+        .cards-reveal.in-view .card:nth-child(3) { animation-delay: .31s; }
+
+        .card {
+            transition: transform .3s cubic-bezier(.22,.68,0,1.2), box-shadow .3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px) !important;
+            box-shadow: 0 24px 48px rgba(0,0,0,.22);
+        }
+        .card:hover .card-image {
+            animation: floatBurger 2.8s ease-in-out infinite;
+        }
+
+        .heading-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+        .heading-reveal.in-view {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* ── SERVICES ── */
@@ -314,13 +379,23 @@
             margin-bottom: 22px;
         }
 
-        .card-price-promo {
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: .06em;
-            margin-bottom: 6px;
-            opacity: .95;
+        .card-price-promo { display: none; }
+
+        .card-ribbon-wrap { display: none; }
+
+        .card-badge {
+            display: inline-block;
+            background: #fff;
+            color: #c9491a;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: .12em;
             text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 999px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 0 2px rgba(255,255,255,.4), 0 4px 12px rgba(0,0,0,.15);
         }
 
         .card-price-row {
@@ -370,14 +445,11 @@
         /* ── DELIVERY ── */
         .delivery {
             background: #fff;
-            overflow-x: clip;
-            overflow-y: visible;
-            padding: 500px 0 200px;
+            padding: 120px 0;
             position: relative;
         }
 
         .delivery-inner {
-            min-height: 680px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -388,49 +460,92 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 22px;
+            gap: 20px;
             text-align: center;
-            z-index: 2;
             position: relative;
         }
 
+        .delivery-eyebrow {
+            color: rgba(255,255,255,.45);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+        }
+
         .delivery-title {
-            color: var(--orange);
+            color: #fff;
             font-family: 'Anton', sans-serif;
-            font-size: 72px;
-            font-weight: 900;
-            letter-spacing: .02em;
-            line-height: 1.02;
+            font-size: clamp(52px, 7vw, 96px);
+            letter-spacing: .03em;
+            line-height: 1;
             margin: 0;
             text-transform: uppercase;
+        }
+        .delivery-title span { color: var(--orange); }
+
+        .delivery-sub {
+            color: rgba(255,255,255,.5);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.55;
+            max-width: 38ch;
+            margin: 0;
         }
 
         .delivery-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: transparent;
-            border: 2px solid var(--orange);
-            border-radius: 6px;
-            box-shadow: 0 3px rgba(241,90,36,.55);
-            color: var(--orange);
+            background: var(--orange);
+            border: none;
+            border-radius: 4px;
+            color: #fff;
             font-family: 'Montserrat', sans-serif;
             font-size: 12px;
             font-weight: 700;
-            height: 42px;
-            letter-spacing: .08em;
+            height: 50px;
+            letter-spacing: .14em;
             text-transform: uppercase;
             text-decoration: none;
-            padding: 0 28px;
-            transition: background .18s, color .18s;
+            padding: 0 36px;
+            margin-top: 8px;
+            transition: background .18s, transform .15s;
         }
-        .delivery-btn:hover { background: var(--orange); color: #fff; }
+        .delivery-btn:hover { background: var(--orange-dark); transform: translateY(-2px); }
+        .delivery-btn--outline {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,.25);
+            color: rgba(255,255,255,.7);
+        }
+        .delivery-btn--outline:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.5); color: #fff; transform: translateY(-2px); }
+        .delivery-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+
+        .spotlight-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--orange);
+            border-radius: 4px;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            height: 50px;
+            letter-spacing: .14em;
+            padding: 0 36px;
+            text-decoration: none;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: transform .15s, box-shadow .15s;
+        }
+        .spotlight-btn:hover { transform: translateY(-2px); background: var(--orange-dark); }
 
         .delivery-decos {
-            position: absolute;
-            top: 0; right: 0; bottom: 0; left: 0;
-            pointer-events: none;
-            z-index: 0;
+            display: none;
         }
 
         .deco {
@@ -455,6 +570,27 @@
             max-width: 720px;
             right: -90px;
             width: min(720px, 70vw);
+        }
+
+        /* burger deko képek */
+        @keyframes floatDeco {
+            0%,100% { transform: translateY(0) rotate(var(--rot)); }
+            50%     { transform: translateY(-14px) rotate(var(--rot)); }
+        }
+        .deco-burger-main {
+            position: absolute;
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: min(600px, 48vw);
+            height: auto;
+            object-fit: contain;
+            pointer-events: none;
+            user-select: none;
+            z-index: 1;
+            filter: drop-shadow(0 24px 40px rgba(0,0,0,.16));
+            animation: floatDeco 5s ease-in-out infinite;
+            --rot: 0deg;
         }
 
         /* ── FEEDBACK / FAQ ── */
@@ -793,10 +929,9 @@
         </a>
         <nav class="desktop-nav">
             <a href="#">KEZDŐLAP</a>
-            <a href="#rolunk">RÓLUNK</a>
             <a href="#etlap">ÉTLAP / ITALLAP</a>
-            <a href="#velemenyek">VÉLEMÉNYEK</a>
-            <a href="#gyik">GYIK</a>
+            <a href="velemenyek.html">VÉLEMÉNYEK</a>
+            <a href="gyik.html">GYIK</a>
             <a href="rendeles.html" class="cart-link" aria-label="Kosár">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" class="cart-icon">
                     <path d="M104,216a16,16,0,1,1-16-16A16,16,0,0,1,104,216Zm88-16a16,16,0,1,0,16,16A16,16,0,0,0,192,200ZM239.71,74.14l-25.64,92.28A24.06,24.06,0,0,1,191,184H92.16A24.06,24.06,0,0,1,69,166.42L33.92,40H16a8,8,0,0,1,0-16H40a8,8,0,0,1,7.71,5.86L57.19,64H232a8,8,0,0,1,7.71,10.14ZM221.47,80H61.64l22.81,82.14A8,8,0,0,0,92.16,168H191a8,8,0,0,0,7.71-5.86Z"/>
@@ -816,15 +951,17 @@
     </div>
     <div class="mobile-nav-wrap" id="mob-nav">
         <a href="#" onclick="closeMob()">KEZDŐLAP</a>
-        <a href="#rolunk" onclick="closeMob()">RÓLUNK</a>
         <a href="#etlap" onclick="closeMob()">ÉTLAP / ITALLAP</a>
-        <a href="#velemenyek" onclick="closeMob()">VÉLEMÉNYEK</a>
-        <a href="#gyik" onclick="closeMob()">GYIK</a>
+        <a href="velemenyek.html" onclick="closeMob()">VÉLEMÉNYEK</a>
+        <a href="gyik.html" onclick="closeMob()">GYIK</a>
     </div>
 </header>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="kezdolap">
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="Images/Burgir%20vidi%202.mp4" type="video/mp4">
+    </video>
     <div class="sp-container">
         <div class="hero-grid">
             <div class="hero-left">
@@ -836,9 +973,6 @@
                 <p class="hero-sub">Frissen sütött, dupla marhahússal és olvadó cheddarral. Egyszerű, őszinte ízek — gyorsan az asztalodon.</p>
                 <a href="menu.html" class="hero-cta">RENDELÉS</a>
             </div>
-            <div class="hero-right" aria-hidden="true">
-                <img src="https://www.smashpoint.hu/img/smash/hero.webp" alt="" class="hero-image">
-            </div>
         </div>
     </div>
 </section>
@@ -846,16 +980,17 @@
 <!-- ═══ SERVICES / ÉTLAP ═══ -->
 <section class="services-section" id="etlap">
     <div class="sp-container">
-        <div class="services-heading">
+        <div class="services-heading heading-reveal">
             <h2 class="heading-title">VÁLASZD KI<br>A KEDVENCED</h2>
         </div>
-        <div class="cards">
+        <div class="cards cards-reveal">
 
             <!-- CLASSIC -->
-            <article class="card" style="background-color:#ff944b; border-color:#c7652c;">
+            <article class="card" style="background-color:#ff944b; border-color:#c7652c; position:relative;">
                 <div class="card-image-wrap">
                     <img src="https://www.smashpoint.hu/img/smash/classic.webp" alt="CLASSIC" class="card-image">
                 </div>
+                <span class="card-badge">Tavaszi akció</span>
                 <h3 class="card-title">CLASSIC</h3>
                 <p class="card-desc">vajas buci · dupla marhahús
 cheddar sajt · hagyma · uborka
@@ -871,10 +1006,11 @@ ketchup · mustár</p>
             </article>
 
             <!-- HOUSE -->
-            <article class="card" style="background-color:#f15a24; border-color:#c9491a;">
+            <article class="card" style="background-color:#f15a24; border-color:#c9491a; position:relative;">
                 <div class="card-image-wrap">
                     <img src="https://www.smashpoint.hu/img/smash/hause.webp" alt="HOUSE" class="card-image">
                 </div>
+                <span class="card-badge">Tavaszi akció</span>
                 <h3 class="card-title">HOUSE</h3>
                 <p class="card-desc">vajas buci · dupla marhahús
 cheddar sajt · hagyma · uborka házi
@@ -907,116 +1043,27 @@ jalapeño · ketchup · mustár</p>
             </article>
 
         </div>
-    </div>
-</section>
-
-<!-- ═══ DELIVERY ═══ -->
-<section class="delivery" id="delivery">
-    <div class="sp-container delivery-inner">
-        <div class="delivery-decos" aria-hidden="true">
-            <img src="https://www.smashpoint.hu/img/smash/jalapenobg.svg" alt="" class="deco deco-jalapeno">
-            <img src="https://www.smashpoint.hu/img/smash/krumpli.svg" alt="" class="deco deco-fries">
-        </div>
-        <div class="delivery-content">
-            <h2 class="delivery-title">RENDELD HÁZHOZ</h2>
-            <a href="rendeles.html" class="delivery-btn">Rendelés</a>
+        <div style="display:flex; justify-content:center; margin-top:48px;">
+            <a href="menu.html" class="spotlight-btn">Teljes étlap / itallap</a>
         </div>
     </div>
 </section>
 
-<!-- ═══ VISSZAJELZÉSEK + GYIK ═══ -->
-<section class="ff-section" id="velemenyek">
-    <div class="sp-container">
-
-        <h2 class="ff-heading">VISSZAJELZÉSEK</h2>
-
-        <div class="reviews">
-            <article class="review-card">
-                <p class="review-text">"Nagyon finom volt a hamburger és a sült krumpli is.
-Gyors kiszolgálás. Ide még biztos jövök!"</p>
-                <div class="review-name">Krisztina Hay</div>
-                <div class="review-stars" aria-label="5 csillag">★★★★★</div>
-            </article>
-            <article class="review-card">
-                <p class="review-text">"Imádjuk a Smash hamburgert!
-Kiváló minőség, kiváló kiszolgálás!"</p>
-                <div class="review-name">Éva Pap</div>
-                <div class="review-stars" aria-label="5 csillag">★★★★★</div>
-            </article>
-        </div>
-
-        <h2 class="ff-heading ff-heading--faq" id="gyik">GYAKORI KÉRDÉSEK</h2>
-
-        <div class="faq">
-
-            <div class="faq-item open">
-                <button class="faq-q" type="button">
-                    <span class="faq-q-text">Mi az a Smashburger?</span>
-                    <span class="faq-icon is-open">
-                        <span class="faq-icon-line"></span>
-                        <span class="faq-icon-line faq-icon-line--v"></span>
-                    </span>
-                </button>
-                <div class="faq-a">A smash burger lényege, hogy a húspogácsát forró sütőlapon lapítjuk szét, így extra ropogós kérget kap, miközben belül szaftos marad.</div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-q" type="button">
-                    <span class="faq-q-text">Miért lesz ropogósabb a smash technikától?</span>
-                    <span class="faq-icon">
-                        <span class="faq-icon-line"></span>
-                        <span class="faq-icon-line faq-icon-line--v"></span>
-                    </span>
-                </button>
-                <div class="faq-a">Amikor a húst a forró felületre nyomjuk, az érintkezési felület megnő, ami felgyorsítja a Maillard-reakciót — ez a kémiai folyamat felel a barna, ropogós kéreg kialakulásáért.</div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-q" type="button">
-                    <span class="faq-q-text">Milyen húsból készül a pogácsa, és miért fontos a zsírtartalom?</span>
-                    <span class="faq-icon">
-                        <span class="faq-icon-line"></span>
-                        <span class="faq-icon-line faq-icon-line--v"></span>
-                    </span>
-                </button>
-                <div class="faq-a">Friss, minőségi marhahúst használunk, amelynek zsírtartalma körülbelül 20–30%. A zsír elengedhetetlen: a nyomás hatására kiolvad, a húst belülről szaftossá, kívülről ropogóssá teszi.</div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-q" type="button">
-                    <span class="faq-q-text">Mennyi idő alatt érkezik ki a rendelés, és hogyan marad friss?</span>
-                    <span class="faq-icon">
-                        <span class="faq-icon-line"></span>
-                        <span class="faq-icon-line faq-icon-line--v"></span>
-                    </span>
-                </button>
-                <div class="faq-a">Minden burgert frissen, rendelésre készítünk, a felkészítési idő általában 10–15 perc. A rendelést speciális csomagolásban adjuk át, amely megőrzi a hőt és a textúrát.</div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-q" type="button">
-                    <span class="faq-q-text">Allergének: van glutén- vagy laktózmentes opció?</span>
-                    <span class="faq-icon">
-                        <span class="faq-icon-line"></span>
-                        <span class="faq-icon-line faq-icon-line--v"></span>
-                    </span>
-                </button>
-                <div class="faq-a">Étlapunkon jelenleg nincs külön glutén- vagy laktózmentes opció. Allergiával kapcsolatos kérdések esetén kérjük, vedd fel velünk a kapcsolatot az info@smashpoint.hu e-mail-címen.</div>
-            </div>
-
-        </div>
+<!-- ═══ VIDEO BREAK ═══ -->
+<section style="background:#000; overflow:hidden; position:relative; line-height:0;">
+    <video autoplay muted loop playsinline style="width:100%; max-height:520px; object-fit:cover; display:block; opacity:.65;">
+        <source src="Images/burgir%20es%C3%A9s%20120%20fps.mp4" type="video/mp4">
+    </video>
+    <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; padding:0 24px;">
+        <p style="font-family:'Anton',sans-serif; font-size:clamp(42px,6vw,90px); line-height:1.05; text-transform:uppercase; letter-spacing:.02em; color:#f0ece4; margin:0;">
+            A TÖKÉLETES<br>
+            <span style="color:#f15a24;">SMASH</span><br>
+            MINDEN EGYES ALKALOMMAL.
+        </p>
     </div>
 </section>
 
-<!-- ═══ CTA BUTTONS ═══ -->
-<div class="sp-cta" id="rolunk">
-    <div class="sp-container">
-        <div class="sp-cta__inner">
-            <a href="rendeles.html" class="sp-cta__btn sp-cta__btn--primary sp-cta__btn--pulse">Rendelés leadása</a>
-            <a href="#etlap" class="sp-cta__btn">Étlap megtekintése</a>
-        </div>
-    </div>
-</div>
+<div style="background:#fff; height:100px;"></div>
 
 <!-- ═══ FOOTER ═══ -->
 <footer class="sp-footer" id="CONTACT">
@@ -1041,15 +1088,14 @@ Kiváló minőség, kiváló kiszolgálás!"</p>
             </div>
             <div class="sp-footer__col">
                 <div class="sp-footer__links">
-                    <a href="#rolunk" class="sp-footer__link">Rólunk</a>
                     <a href="#" class="sp-footer__link">Kezdőlap</a>
                     <a href="#etlap" class="sp-footer__link">Étlap / Itallap</a>
                 </div>
             </div>
             <div class="sp-footer__col">
                 <div class="sp-footer__links">
-                    <a href="#velemenyek" class="sp-footer__link">Vélemények</a>
-                    <a href="#gyik" class="sp-footer__link">GYIK</a>
+                    <a href="velemenyek.html" class="sp-footer__link">Vélemények</a>
+                    <a href="gyik.html" class="sp-footer__link">GYIK</a>
                 </div>
             </div>
             <div class="sp-footer__col">
@@ -1135,6 +1181,19 @@ Kiváló minőség, kiváló kiszolgálás!"</p>
     }
 
     updateCartBadge();
+
+    // Header megjelenés scrollozáskor
+    const siteHeader = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        siteHeader.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); observer.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.cards-reveal, .heading-reveal').forEach(el => observer.observe(el));
+
 </script>
 </body>
 </html>
