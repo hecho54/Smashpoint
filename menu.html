@@ -344,47 +344,45 @@
             .sp-container { padding: 0 16px; }
             .sp-menu { padding: 24px 0 56px; }
             .sp-menu__title { font-size: 2rem; }
-            .sp-menu__sectionTitle { font-size: 2rem; margin: 1em 0; }
+            .sp-menu__sectionTitle { font-size: 1.8rem; margin: 1em 0 .7em; }
             .sp-menu__switch { gap: 8px; }
             .sp-menu__switchBtn { font-size: 11px; padding: 8px 12px; }
 
-            /* burger cards */
-            .sp-menu-card { grid-template-columns: 100px 1fr 52px; height: 11em; border-radius: .8em; }
-            .sp-menu-card__img { bottom: -5.5em; height: 17em; left: -6em; width: 17em; }
-            .sp-menu-card__content { padding: 10px 8px 10px 10px; width: 100%; }
-            .sp-menu-card__name { font-size: 1.35rem; }
-            .sp-menu-card__desc { font-size: .72rem; width: auto; margin-top: 3px; }
-            .sp-menu-card__price { font-size: 1.1rem; margin-top: 4px; }
-            .sp-pricePromo { font-size: 10px; }
-            .sp-menu-card__add { height: 2.8em; right: .6em; width: 2.8em; }
-            .sp-menu-card__addPlus { font-size: 2.2em; }
+            /* burger cards — push image further left so text is not covered */
+            .sp-menu-card { grid-template-columns: 96px 1fr 48px; height: 10em; border-radius: .8em; }
+            .sp-menu-card__img { bottom: -4em; height: 14em; left: -8em; width: 14em; }
+            .sp-menu-card__content { padding: 8px 6px 8px 8px; width: 100%; }
+            .sp-menu-card__name { font-size: 1.15rem; }
+            .sp-menu-card__desc { font-size: .68rem; width: auto; margin-top: 2px; }
+            .sp-menu-card__price { font-size: 1rem; margin-top: 3px; }
+            .sp-pricePromo { font-size: 9px; }
+            .sp-menu-card__add { height: 2.6em; right: .4em; width: 2.6em; }
+            .sp-menu-card__addPlus { font-size: 2em; }
 
             /* sauce mini cards — 2 columns */
             .sp-menu__grid--3 { grid-template-columns: repeat(2, 1fr); gap: 1em; }
-            .sp-menu__grid--2 { grid-template-columns: repeat(2, 1fr); gap: 1em; }
-            .sp-mini-card { height: 16em; border-radius: .8em; }
-            .sp-mini-card--sauce .sp-mini-card__name { font-size: 1.4rem; top: .9em; }
-            .sp-mini-card--sauce .sp-mini-card__price { font-size: 1.4rem; top: 2.1em; }
-            .sp-mini-card--sauce .sp-mini-card__add { height: 2.8em; right: .8em; top: 6.5em; width: 2.8em; }
-            .sp-mini-card__img { height: 20em; width: 20em; bottom: -7em; right: .5em; }
+            .sp-mini-card { height: 15em; border-radius: .8em; }
+            .sp-mini-card--sauce .sp-mini-card__name { font-size: 1.25rem; top: .8em; }
+            .sp-mini-card--sauce .sp-mini-card__price { font-size: 1.25rem; top: 2em; }
+            .sp-mini-card--sauce .sp-mini-card__add { height: 2.6em; right: .7em; top: 6em; width: 2.6em; }
+            .sp-mini-card__img { height: 18em; width: 18em; bottom: -6em; right: .3em; }
 
-            /* drink cards */
-            .sp-drink-card { grid-template-columns: 80px 1fr 48px; height: 9em; border-radius: .8em; }
-            .sp-drink-card__name { font-size: 1.2rem; left: 5.5em; top: 1.4em; }
-            .sp-drink-card__sub { font-size: 1.2rem; left: 5.5em; top: 2.2em; }
-            .sp-drink-card__img { height: 20em; width: 20em; }
-            .sp-drink-card__size { font-size: 1.1rem; left: 6.8em; }
-            .sp-drink-card__price { font-size: 1.2rem; left: 5.8em; }
-            .sp-drink-card__add { height: 2.8em; top: 3.2em; width: 2.8em; right: .5em; }
+            /* drink cards — 1 column, simpler layout */
+            .sp-menu__grid--2 { grid-template-columns: 1fr; gap: 12px; }
+            .sp-drink-card { grid-template-columns: 90px 1fr 50px; height: 8em; border-radius: .8em; }
+            .sp-drink-card__img { height: 15em; width: 15em; right: 12em; bottom: -4em; }
+            .sp-drink-card__name { font-size: 1.3rem; left: 6em; top: 1em; }
+            .sp-drink-card__sub { font-size: 1.3rem; left: 6em; top: 1.9em; }
+            .sp-drink-card__size { font-size: 1rem; left: 7em; bottom: 1.8em; }
+            .sp-drink-card__price { font-size: 1.2rem; left: 6.2em; bottom: .5em; }
+            .sp-drink-card__add { height: 2.6em; top: 2.7em; width: 2.6em; right: .6em; }
 
             /* footer */
-            .sp-footer { padding: 280px 0 40px; }
-            .sp-footer__logo img { width: 200px; }
+            .sp-footer { padding: 180px 0 36px; }
+            .sp-footer__logo img { width: 180px; }
             .sp-footer__desc { font-size: 12px; }
-            .sp-footer__bottom { margin-top: 48px; font-size: 11px; }
-
-            /* cart bar */
-            .cartbar { padding: 10px 16px; }
+            .sp-footer__bottom { margin-top: 36px; font-size: 11px; }
+            .cartbar { padding: 8px 12px; }
         }
         /* ── SCROLL REVEAL ── */
         @keyframes menuItemIn {
