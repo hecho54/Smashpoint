@@ -42,11 +42,6 @@
             z-index: 50;
             background: var(--orange);
             padding: 1.1rem 0;
-            transform: translateY(-100%);
-            transition: transform .35s cubic-bezier(.4,0,.2,1);
-        }
-        header.scrolled {
-            transform: translateY(0);
         }
 
         .header-inner {
@@ -166,10 +161,26 @@
 
         /* ── HERO ── */
         .hero {
-            background: transparent;
-            min-height: 100vh;
-            position: relative;
             overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+        }
+
+        .hero-left {
+            background: var(--orange);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5rem 3.5rem 5rem 2rem;
+        }
+
+        .hero-video-col {
+            overflow: hidden;
+            position: relative;
         }
 
         .hero-video {
@@ -178,22 +189,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 1;
             pointer-events: none;
-            z-index: 0;
-        }
-
-        .hero .sp-container {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-grid {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 4.25rem 0 5.25rem;
         }
 
         .kicker {
@@ -206,7 +202,7 @@
         }
 
         .hero-title {
-            color: #f15a24;
+            color: #fff;
             font-family: 'Archivo Black', sans-serif;
             font-size: clamp(62px, 6.6vw, 96px);
             letter-spacing: .02em;
@@ -228,20 +224,21 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: var(--orange);
-            border-radius: 3px;
-            color: #fff;
+            background: #fff;
+            border-radius: 4px;
+            color: var(--orange);
             font-family: 'Montserrat', sans-serif;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
-            height: 48px;
+            height: 38px;
             letter-spacing: .12em;
-            padding: 0 26px;
+            padding: 0 20px;
             text-transform: uppercase;
             text-decoration: none;
-            transition: background .18s;
+            transition: opacity .18s;
+            align-self: flex-start;
         }
-        .hero-cta:hover { background: var(--orange-dark); }
+        .hero-cta:hover { opacity: .88; }
 
         .hero-right {
             display: flex;
@@ -883,8 +880,6 @@
             nav.desktop-nav { display: none; }
             .mobile-nav-toggle { display: flex; }
             .mobile-top { display: flex; }
-            /* show header immediately on mobile — scroll-reveal only for desktop */
-            header { transform: translateY(0) !important; }
 
             .hero-grid {
                 grid-template-columns: 1fr;
@@ -919,12 +914,20 @@
         @media (max-width: 767px) {
             .sp-container { padding: 0 16px; }
 
+            /* anatomy */
+            .anatomy-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+
             /* hero */
-            .hero { min-height: 100svh; padding-top: 62px; }
-            .hero-grid { padding: 3rem 0 3.5rem; min-height: calc(100svh - 62px); }
-            .hero-title { font-size: clamp(48px, 13vw, 72px); }
-            .hero-sub { font-size: 14px; max-width: 100%; }
-            .hero-cta { height: 44px; font-size: 11px; }
+            .hero-grid { grid-template-columns: 1fr; }
+            .hero-left {
+                padding: 72px 20px 40px;
+                text-align: center;
+                align-items: center;
+            }
+            .hero-video-col { height: 60vw; min-height: 220px; max-height: 320px; }
+            .hero-title { font-size: clamp(44px, 14vw, 68px); margin-bottom: 14px; }
+            .hero-sub { font-size: 14px; max-width: 100%; margin-bottom: 22px; }
+            .hero-cta { align-self: center; height: 42px; font-size: 12px; padding: 0 22px; }
 
             /* cards */
             .services-section { padding: 48px 0 36px; }
@@ -997,9 +1000,22 @@
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="kezdolap">
-    <video class="hero-video" autoplay muted loop playsinline>
-        <source src="Images/Burgir%20vidi%202.mp4" type="video/mp4">
-    </video>
+    <div class="hero-grid">
+        <div class="hero-left">
+            <p class="kicker">SMASH IT - EAT IT - LOVE IT</p>
+            <h1 class="hero-title">
+                <span>SMASH</span>
+                <span>BURGER</span>
+            </h1>
+            <p class="hero-sub">Frissen sütött, dupla marhahússal és olvadó cheddarral. Egyszerű, őszinte ízek — gyorsan az asztalodon.</p>
+            <a href="menu.html" class="hero-cta">RENDELÉS</a>
+        </div>
+        <div class="hero-video-col">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="Images/Burgir%20vidi%202.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
 </section>
 
 <!-- ═══ SERVICES / ÉTLAP ═══ -->
@@ -1073,14 +1089,13 @@ jalapeño · ketchup · mustár</p>
         </div>
     </div>
 </section>
-
 <!-- ═══ VIDEO BREAK ═══ -->
-<section style="background:#000; overflow:hidden; position:relative; line-height:0;">
-    <video autoplay muted loop playsinline style="width:100%; max-height:520px; object-fit:cover; display:block; opacity:.65;">
+<section style="overflow:hidden; position:relative; line-height:0;">
+    <video autoplay muted loop playsinline style="width:100%; max-height:520px; object-fit:cover; display:block; opacity:1;">
         <source src="Images/burgir%20es%C3%A9s%20120%20fps.mp4" type="video/mp4">
     </video>
     <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; padding:0 24px;">
-        <p style="font-family:'Anton',sans-serif; font-size:clamp(42px,6vw,90px); line-height:1.05; text-transform:uppercase; letter-spacing:.02em; color:#f0ece4; margin:0;">
+        <p style="font-family:'Anton',sans-serif; font-size:clamp(42px,6vw,90px); line-height:1.05; text-transform:uppercase; letter-spacing:.02em; color:#f15a24; margin:0;">
             A TÖKÉLETES<br>
             <span style="color:#f15a24;">SMASH</span><br>
             MINDEN EGYES ALKALOMMAL.
