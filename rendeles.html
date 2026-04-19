@@ -296,6 +296,19 @@
             .sp-footer__grid { gap: 26px; grid-template-columns: 1fr; }
             .sp-footer__links, .sp-footer__contact { margin-top: 22px; }
         }
+        @media (max-width: 767px) {
+            .sp-container { padding: 0 16px; }
+            .order-page { padding: 40px 0 80px; }
+            .order-title { font-size: clamp(32px, 9vw, 48px); margin-bottom: 22px; }
+            .order-form, .order-summary { padding: 16px; border-radius: 12px; }
+            .order-grid { gap: 18px; }
+            .order-input, .order-textarea { font-size: 16px; }
+            .cartbar { padding: 8px 12px; }
+            .sp-footer { padding: 280px 0 36px; }
+            .sp-footer__logo img { width: 180px; }
+            .sp-footer__desc { font-size: 12px; }
+            .sp-footer__bottom { margin-top: 36px; font-size: 11px; }
+        }
     </style>
 </head>
 <body>
@@ -308,7 +321,6 @@
         </a>
         <nav class="desktop-nav">
             <a href="index.html">KEZDŐLAP</a>
-            <a href="index.html#rolunk">RÓLUNK</a>
             <a href="index.html#etlap">ÉTLAP / ITALLAP</a>
             <a href="index.html#velemenyek">VÉLEMÉNYEK</a>
             <a href="index.html#gyik">GYIK</a>
@@ -332,7 +344,6 @@
     </div>
     <div class="mobile-nav-drawer" id="mob-drawer">
         <a href="index.html">KEZDŐLAP</a>
-        <a href="index.html#rolunk">RÓLUNK</a>
         <a href="index.html#etlap">ÉTLAP / ITALLAP</a>
         <a href="index.html#velemenyek">VÉLEMÉNYEK</a>
         <a href="index.html#gyik">GYIK</a>
@@ -427,20 +438,16 @@
                 </a>
                 <p class="sp-footer__desc">Gyere el finom burgerekért és frissítő italokért egy barátságos, otthonos környezetbe — ahol minden látogatás igazi élmény.</p>
                 <div class="sp-footer__social">
-                    <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="sp-footer__social-link">
+                    <a href="https://www.facebook.com/profile.php?id=61582489610937" target="_blank" rel="noopener" aria-label="Facebook" class="sp-footer__social-link">
                         <img src="https://www.smashpoint.hu/img/smash/facebook-white.svg" alt="Facebook">
                     </a>
-                    <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="sp-footer__social-link">
+                    <a href="https://www.instagram.com/smshpoint/" target="_blank" rel="noopener" aria-label="Instagram" class="sp-footer__social-link">
                         <img src="https://www.smashpoint.hu/img/smash/instagram-white.svg" alt="Instagram">
-                    </a>
-                    <a href="https://www.youtube.com" target="_blank" rel="noopener" aria-label="YouTube" class="sp-footer__social-link">
-                        <img src="https://www.smashpoint.hu/img/smash/youtube-white.svg" alt="YouTube">
                     </a>
                 </div>
             </div>
             <div class="sp-footer__col">
                 <div class="sp-footer__links">
-                    <a href="index.html#rolunk" class="sp-footer__link">Rólunk</a>
                     <a href="index.html" class="sp-footer__link">Kezdőlap</a>
                     <a href="index.html#etlap" class="sp-footer__link">Étlap / Itallap</a>
                 </div>
@@ -456,6 +463,7 @@
                     <div> Nagykőrös, Deák tér 1, Nagykőrös </div>
                     <div>2750</div>
                     <div>info@smashpoint.hu</div>
+                    <div>+36 20 494 4325</div>
                 </div>
             </div>
         </div>

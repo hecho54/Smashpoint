@@ -300,7 +300,7 @@
         /* ── SERVICES ── */
         .services-section {
             background: #fff;
-            padding: 80px 0 96px;
+            padding: 80px 0 48px;
         }
 
         .services-heading {
@@ -912,10 +912,37 @@
         }
 
         @media (max-width: 767px) {
-            .services-section { padding: 70px 0 90px; }
-            .delivery-title { font-size: 54px; }
-            .review-name { font-size: 20px; }
-            .faq-q-text, .faq-a { font-size: 12px; }
+            .sp-container { padding: 0 16px; }
+
+            /* hero */
+            .hero { min-height: 100svh; }
+            .hero-grid { padding: 5rem 0 4rem; }
+            .hero-title { font-size: clamp(48px, 13vw, 72px); }
+            .hero-sub { font-size: 14px; max-width: 100%; }
+            .hero-cta { height: 44px; font-size: 11px; }
+
+            /* cards */
+            .services-section { padding: 48px 0 36px; }
+            .heading-title { font-size: clamp(32px, 9vw, 48px); }
+            .card { border-radius: 16px; }
+            .card-title { font-size: 1.6rem; }
+            .card-desc { font-size: .78rem; }
+            .card-price-now, .card-price-old { font-size: 1.3rem; }
+            .card-badge { font-size: 10px; padding: 4px 10px; }
+            .spotlight-btn { font-size: 11px; height: 46px; padding: 0 24px; }
+
+            /* video break */
+            section[style*="background:#000"] p { font-size: clamp(30px, 9vw, 52px) !important; }
+
+            /* location CTA */
+            section[style*="padding:72px"] { padding: 40px 16px !important; }
+            section[style*="padding:72px"] a { font-size: 11px; height: 46px; padding: 0 22px; }
+
+            /* footer */
+            .sp-footer { padding: 280px 0 40px; }
+            .sp-footer__logo img { width: 180px; }
+            .sp-footer__desc { font-size: 12px; }
+            .sp-footer__bottom { margin-top: 40px; font-size: 11px; }
         }
     </style>
 </head>
@@ -1063,7 +1090,20 @@ jalapeño · ketchup · mustár</p>
     </div>
 </section>
 
-<div style="background:#fff; height:100px;"></div>
+<div style="background:#fff; height:36px;"></div>
+
+<!-- ═══ LOCATION CTA ═══ -->
+<section style="background:#fff; padding:72px 0; text-align:center;">
+    <div style="max-width:1200px; margin:0 auto; padding:0 28px;">
+        <a href="https://www.google.com/maps/place/Smash+Point/@47.0336739,19.7809388,19.5z/data=!4m6!3m5!1s0x474163ebd8234b67:0x13b1e257b540b17d!8m2!3d47.0335774!4d19.7810538!16s%2Fg%2F11msmgrksm?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"
+            style="display:inline-flex; align-items:center; gap:10px; background:#f15a24; border-radius:4px; color:#fff; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; height:52px; letter-spacing:.14em; padding:0 32px; text-decoration:none; text-transform:uppercase; transition:background .18s, transform .15s;"
+            onmouseover="this.style.background='#c9491a';this.style.transform='translateY(-2px)'"
+            onmouseout="this.style.background='#f15a24';this.style.transform='translateY(0)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Elhelyezkedés megtekintése
+        </a>
+    </div>
+</section>
 
 <!-- ═══ FOOTER ═══ -->
 <footer class="sp-footer" id="CONTACT">
@@ -1075,14 +1115,11 @@ jalapeño · ketchup · mustár</p>
                 </a>
                 <p class="sp-footer__desc">Gyere el finom burgerekért és frissítő italokért egy barátságos, otthonos környezetbe — ahol minden látogatás igazi élmény.</p>
                 <div class="sp-footer__social">
-                    <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="sp-footer__social-link">
+                    <a href="https://www.facebook.com/profile.php?id=61582489610937" target="_blank" rel="noopener" aria-label="Facebook" class="sp-footer__social-link">
                         <img src="https://www.smashpoint.hu/img/smash/facebook-white.svg" alt="Facebook">
                     </a>
-                    <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="sp-footer__social-link">
+                    <a href="https://www.instagram.com/smshpoint/" target="_blank" rel="noopener" aria-label="Instagram" class="sp-footer__social-link">
                         <img src="https://www.smashpoint.hu/img/smash/instagram-white.svg" alt="Instagram">
-                    </a>
-                    <a href="https://www.youtube.com" target="_blank" rel="noopener" aria-label="YouTube" class="sp-footer__social-link">
-                        <img src="https://www.smashpoint.hu/img/smash/youtube-white.svg" alt="YouTube">
                     </a>
                 </div>
             </div>
@@ -1103,6 +1140,7 @@ jalapeño · ketchup · mustár</p>
                     <div>Nagykőrös, Deák tér 1, Nagykőrös</div>
                     <div>2750</div>
                     <div>info@smashpoint.hu</div>
+                    <div>+36 20 494 4325</div>
                 </div>
             </div>
         </div>

@@ -341,23 +341,50 @@
             .sp-footer__links, .sp-footer__contact { margin-top: 22px; }
         }
         @media (max-width: 767px) {
-            .sp-menu-card { grid-template-columns: 92px 1fr 46px; height: 13em; }
-            .sp-menu-card__img { bottom: -6.7em !important; height: 18em !important; left: -7em !important; width: 18em !important; }
-            .sp-menu-card__content { padding: 10px; position: relative; right: 2.1em; width: 100%; z-index: 2; }
-            .sp-menu-card__name { font-size: 1.6rem; }
-            .sp-menu-card__desc { font-size: .7rem; width: auto; }
-            .sp-menu-card__price { font-size: 1.4rem; }
-            .sp-menu-card__add { height: 3em; right: 1em; width: 3em; }
-            .sp-mini-card { height: 18em; }
-            .sp-mini-card--sauce .sp-mini-card__name, .sp-mini-card--sauce .sp-mini-card__price { font-size: 1.5rem; }
-            .sp-mini-card--sauce .sp-mini-card__add { height: 3em; right: 2em; top: 7em; width: 3em; }
-            .sp-drink-card { grid-template-columns: 78px 1fr 46px; height: 20em; }
-            .sp-drink-card__name { font-size: 1.5rem; left: 6em; top: 1.7em; }
-            .sp-drink-card__sub { font-size: 1.5rem; left: 6em; top: 2.6em; }
-            .sp-drink-card__img { height: 27em; width: 27em; }
-            .sp-drink-card__size { font-size: 1.3rem; left: 7.7em; }
-            .sp-drink-card__price { font-size: 1.5rem; left: 6.7em; }
-            .sp-drink-card__add { height: 3em; top: 9em; width: 3em; }
+            .sp-container { padding: 0 16px; }
+            .sp-menu { padding: 24px 0 56px; }
+            .sp-menu__title { font-size: 2rem; }
+            .sp-menu__sectionTitle { font-size: 2rem; margin: 1em 0; }
+            .sp-menu__switch { gap: 8px; }
+            .sp-menu__switchBtn { font-size: 11px; padding: 8px 12px; }
+
+            /* burger cards */
+            .sp-menu-card { grid-template-columns: 100px 1fr 52px; height: 11em; border-radius: .8em; }
+            .sp-menu-card__img { bottom: -5.5em; height: 17em; left: -6em; width: 17em; }
+            .sp-menu-card__content { padding: 10px 8px 10px 10px; width: 100%; }
+            .sp-menu-card__name { font-size: 1.35rem; }
+            .sp-menu-card__desc { font-size: .72rem; width: auto; margin-top: 3px; }
+            .sp-menu-card__price { font-size: 1.1rem; margin-top: 4px; }
+            .sp-pricePromo { font-size: 10px; }
+            .sp-menu-card__add { height: 2.8em; right: .6em; width: 2.8em; }
+            .sp-menu-card__addPlus { font-size: 2.2em; }
+
+            /* sauce mini cards — 2 columns */
+            .sp-menu__grid--3 { grid-template-columns: repeat(2, 1fr); gap: 1em; }
+            .sp-menu__grid--2 { grid-template-columns: repeat(2, 1fr); gap: 1em; }
+            .sp-mini-card { height: 16em; border-radius: .8em; }
+            .sp-mini-card--sauce .sp-mini-card__name { font-size: 1.4rem; top: .9em; }
+            .sp-mini-card--sauce .sp-mini-card__price { font-size: 1.4rem; top: 2.1em; }
+            .sp-mini-card--sauce .sp-mini-card__add { height: 2.8em; right: .8em; top: 6.5em; width: 2.8em; }
+            .sp-mini-card__img { height: 20em; width: 20em; bottom: -7em; right: .5em; }
+
+            /* drink cards */
+            .sp-drink-card { grid-template-columns: 80px 1fr 48px; height: 9em; border-radius: .8em; }
+            .sp-drink-card__name { font-size: 1.2rem; left: 5.5em; top: 1.4em; }
+            .sp-drink-card__sub { font-size: 1.2rem; left: 5.5em; top: 2.2em; }
+            .sp-drink-card__img { height: 20em; width: 20em; }
+            .sp-drink-card__size { font-size: 1.1rem; left: 6.8em; }
+            .sp-drink-card__price { font-size: 1.2rem; left: 5.8em; }
+            .sp-drink-card__add { height: 2.8em; top: 3.2em; width: 2.8em; right: .5em; }
+
+            /* footer */
+            .sp-footer { padding: 280px 0 40px; }
+            .sp-footer__logo img { width: 200px; }
+            .sp-footer__desc { font-size: 12px; }
+            .sp-footer__bottom { margin-top: 48px; font-size: 11px; }
+
+            /* cart bar */
+            .cartbar { padding: 10px 16px; }
         }
         /* ── SCROLL REVEAL ── */
         @keyframes menuItemIn {
@@ -382,7 +409,6 @@
         </a>
         <nav class="desktop-nav">
             <a href="index.html">KEZDŐLAP</a>
-            <a href="index.html#rolunk">RÓLUNK</a>
             <a href="menu.html" class="active">ÉTLAP / ITALLAP</a>
             <a href="index.html#velemenyek">VÉLEMÉNYEK</a>
             <a href="index.html#gyik">GYIK</a>
@@ -407,7 +433,6 @@
     </div>
     <div class="mobile-nav-drawer" id="mob-drawer">
         <a href="index.html">KEZDŐLAP</a>
-        <a href="index.html#rolunk">RÓLUNK</a>
         <a href="menu.html">ÉTLAP / ITALLAP</a>
         <a href="index.html#velemenyek">VÉLEMÉNYEK</a>
         <a href="index.html#gyik">GYIK</a>
@@ -557,16 +582,6 @@ jalapeño · ketchup · mustár</div>
                     </button>
                 </article>
 
-                <article class="sp-mini-card sp-mini-card--sauce" style="background-color:#ff944b;">
-                    <div class="sp-mini-card__imgWrap">
-                        <img src="https://www.smashpoint.hu/img/smash/menukepekhatter/szosz2.webp" alt="MAJONÉZ" class="sp-mini-card__img">
-                    </div>
-                    <div class="sp-mini-card__name">MAJONÉZ</div>
-                    <div class="sp-mini-card__price">200 Ft</div>
-                    <button type="button" class="sp-mini-card__add" aria-label="Kosárba" onclick="addToCart(this,'majonez','MAJONÉZ',200)">
-                        <span class="sp-mini-card__addPlus">+</span>
-                    </button>
-                </article>
 
                 <article class="sp-mini-card sp-mini-card--sauce" style="background-color:#ff944b;">
                     <div class="sp-mini-card__imgWrap">
@@ -670,14 +685,12 @@ jalapeño · ketchup · mustár</div>
                 </a>
                 <p class="sp-footer__desc">Gyere el finom burgerekért és frissítő italokért egy barátságos, otthonos környezetbe — ahol minden látogatás igazi élmény.</p>
                 <div class="sp-footer__social">
-                    <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="sp-footer__social-link"><img src="https://www.smashpoint.hu/img/smash/facebook-white.svg" alt="Facebook"></a>
-                    <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="sp-footer__social-link"><img src="https://www.smashpoint.hu/img/smash/instagram-white.svg" alt="Instagram"></a>
-                    <a href="https://www.youtube.com" target="_blank" rel="noopener" aria-label="YouTube" class="sp-footer__social-link"><img src="https://www.smashpoint.hu/img/smash/youtube-white.svg" alt="YouTube"></a>
+                    <a href="https://www.facebook.com/profile.php?id=61582489610937" target="_blank" rel="noopener" aria-label="Facebook" class="sp-footer__social-link"><img src="https://www.smashpoint.hu/img/smash/facebook-white.svg" alt="Facebook"></a>
+                    <a href="https://www.instagram.com/smshpoint/" target="_blank" rel="noopener" aria-label="Instagram" class="sp-footer__social-link"><img src="https://www.smashpoint.hu/img/smash/instagram-white.svg" alt="Instagram"></a>
                 </div>
             </div>
             <div>
                 <div class="sp-footer__links">
-                    <a href="index.html#rolunk" class="sp-footer__link">Rólunk</a>
                     <a href="index.html" class="sp-footer__link">Kezdőlap</a>
                     <a href="menu.html" class="sp-footer__link">Étlap / Itallap</a>
                 </div>
@@ -693,6 +706,7 @@ jalapeño · ketchup · mustár</div>
                     <div> Nagykőrös, Deák tér 1, Nagykőrös </div>
                     <div>2750</div>
                     <div>info@smashpoint.hu</div>
+                    <div>+36 20 494 4325</div>
                 </div>
             </div>
         </div>
